@@ -1,4 +1,4 @@
-select * from cliente;
+select * from tipo_documento;
 
 INSERT INTO pais(pais_nome)VALUES("Brasil");
 INSERT INTO uf(uf_nome,id_pais)VALUES("Ba","1");
@@ -20,3 +20,6 @@ INSERT INTO preco_assinatura(preco_custo)VALUES("50");
 insert into cliente (cliente_nome,cliente_sobrenome,cliente_data_nascimento,cliente_estado_civil,clientes_email,cliente_phone_fixo,cliente_celphone,cliente_cpf,id_pj,id_rua,id_login)
 value("Fernando","gomes","1989/04/11","solteiro","fernandoti@live.com","7133224565","71992114683","04234356784","1","1","1");
 INSERT INTO registro(id_cliente,id_assinatura,id_documento)VALUES("1","1","1");
+INSERT INTO _release(titulo,img_path,video_path)VALUES("texto","imagem","video");
+INSERT INTO status_pagamento(id_cliente,id_cartao,pagamento_status)VALUES("1","1","p");
+INSERT INTO tipo_documento(nome_tipo_documento)VALUES("PDF");
