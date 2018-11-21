@@ -161,6 +161,21 @@ CREATE TABLE cliente (
 )  ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
 os clientes são dividodos em PF e PJ e cada natureza tem suas especificações e endereços';
 
+CREATE TABLE status_pagamento (
+    id_status INT(11) NOT NULL AUTO_INCREMENT,
+    id_cliente INT(11) NOT NULL,
+    id_cartao INT(11) NOT NULL,
+    pagamento_status char NOT NULL,
+    PRIMARY KEY(id_status),
+    FOREIGN KEY (id_cliente)
+		REFERENCES cliente (id_cliente)
+        ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (id_cartao)
+		REFERENCES dados_cartao (id_cartao)
+        ON DELETE NO ACTION ON UPDATE CASCADE
+)  ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
+controle pagamento do cliente';
+
 CREATE TABLE registro (
 	id_cliente INT(11) NOT NULL,
 	id_assinatura INT(11) NOT NULL,
