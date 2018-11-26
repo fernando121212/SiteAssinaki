@@ -137,7 +137,7 @@ CREATE TABLE documento(
     id_documento INT(11) NOT NULL AUTO_INCREMENT,
     documento_content LONGTEXT NOT NULL,
     documento_data DATE NOT NULL,
-    documento_quantidade_partes INT(11) NOT NULL,
+    documento_quantidade_partes INT(11) DEFAULT 2,
     id_tipo_documento INT(11) NOT NULL,
     PRIMARY KEY (id_documento),
     FOREIGN KEY (id_tipo_documento)
@@ -145,6 +145,33 @@ CREATE TABLE documento(
         ON DELETE NO ACTION ON UPDATE CASCADE
 )   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
 documento que será assinado';
+
+CREATE TABLE assinatura(
+    id_assinatura INT(11) NOT NULL AUTO_INCREMENT,
+    assinatura_cod VARBINARY(150) NOT NULL,
+    id_cliente INT(11) NOT NULL,
+    PRIMARY KEY (id_assinatura),
+    FOREIGN KEY (id_cliente)
+        REFERENCES cliente (id_cliente)
+        ON DELETE NO ACTION ON UPDATE CASCADE
+)   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
+assinatura utilizada para assinar o documento e cada cliente possuem apenas uma assinatura';
+
+CREATE TABLE documento_assinado(
+    id_doc_ass INT(11) NOT NULL AUTO_INCREMENT,
+    doc_ass_status VARCHAR(15) DEFAULT 'Falta',
+    id_cliente INT(11) NOT NULL,
+    id_documento INT(11) NOT NULL,
+    PRIMARY KEY (id_doc_ass),
+    FOREIGN KEY (id_cliente)
+        REFERENCES cliente (id_cliente)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_documento)
+        REFERENCES documento (id_documento)
+        ON DELETE CASCADE ON UPDATE CASCADE
+)   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
+cada cliente tem uma assinatura em exatamente um documento por vez, mas uma assinatura pode
+estar em muitos documentos e um cliente pode ter assinado mais de um documento.';
 
 CREATE TABLE dados_cartao(
     id_cartao INT(11) NOT NULL AUTO_INCREMENT,
@@ -161,18 +188,6 @@ CREATE TABLE dados_cartao(
 )   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
 dados do cartão para cada cliente usuário do serviço de assinatura';
 
-
-CREATE TABLE assinatura(
-    id_assinatura INT(11) NOT NULL AUTO_INCREMENT,
-    assinatura_cod VARBINARY(150) NOT NULL,
-    id_cliente INT(11) NOT NULL,
-    PRIMARY KEY (id_assinatura),
-    FOREIGN KEY (id_cliente)
-        REFERENCES cliente (id_cliente)
-        ON DELETE NO ACTION ON UPDATE CASCADE
-)   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
-assinatura utilizada para assinar o documento e cada cliente possuem apenas uma assinatura';
-
 CREATE TABLE status_pagamento(
     id_status INT(11) NOT NULL AUTO_INCREMENT,
     id_cliente INT(11) NOT NULL,
@@ -187,20 +202,4 @@ CREATE TABLE status_pagamento(
         ON DELETE NO ACTION ON UPDATE CASCADE
 )   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
 controle pagamento do cliente';
-
-CREATE TABLE documento_assinado(
-    id_doc_ass INT(11) NOT NULL AUTO_INCREMENT,
-    doc_ass_status VARCHAR(15) NOT NULL,
-	id_cliente INT(11) NOT NULL,
-	id_documento INT(11) NOT NULL,
-	PRIMARY KEY (id_doc_ass),
-	FOREIGN KEY (id_cliente)
-		REFERENCES cliente (id_cliente)
-		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (id_documento)
-		REFERENCES documento (id_documento)
-		ON DELETE CASCADE ON UPDATE CASCADE
-)   ENGINE=INNODB DEFAULT CHARACTER SET=UTF8 COLLATE = UTF8_BIN COMMENT='
-cada cliente tem uma assinatura em exatamente um documento por vez, mas uma assinatura pode
-estar em muitos documentos e um cliente pode ter assinado mais de um documento.';
 

@@ -43,7 +43,7 @@ cliente_celphone,
 cliente_cpf,
 id_rua)
 value(
-"Fernando",
+"Fernando3",
 "gomes",
 "1989/04/11",
 "solteiro",
@@ -53,7 +53,7 @@ value(
 "04234356784",
 "1"),
 (
-"Fernando1",
+"Fernando4",
 "gomes1",
 "2989/04/11",
 "solteiro1",
@@ -63,7 +63,7 @@ value(
 "14234356784",
 "1"),
 (
-"Fernando2",
+"Fernando5",
 "gomes2",
 "3989/04/11",
 "Casado",
@@ -134,32 +134,36 @@ documento_data,
 documento_quantidade_partes,
 id_tipo_documento)
 VALUES
-("Documento.pdf",
+("Documento3.pdf",
+"11/12/20",
+4,
+"4"),
+("Documento4.pdf",
 "11/12/20",
 3,
-"1"),
-("Documento1.pdf",
-"11/12/20",
-2,
-"2");
+"3");
 
 INSERT INTO assinatura(assinatura_cod,id_cliente)
 VALUES
 ("452543535355456","1"),
 ("052543535355443","2"),
-("352543535355987","3");
+("352543535355987","3"),
+("242543535355443","4");
 
 INSERT INTO documento_assinado(
 doc_ass_status,
 id_cliente,
 id_documento)
 VALUES
-("criar regra",
-"1", "1"),
-("criar regra",
-"2", "1"),
-("criar regra",
-"3", "1");
+("Falta", -- saber se a quantidade de assinaturas, de clientes, é igual a quantidade de partes envolvidas para assinar um documento
+"1", "3"),
+("Falta",
+"2", "3"),
+("Falta",
+"1", "4"),
+-- novo documento
+("Falta",
+"3", "4");
 
 
 INSERT INTO status_pagamento(
