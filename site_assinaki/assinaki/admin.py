@@ -1,11 +1,9 @@
 from django.contrib import admin
-from .models import Pais
+from .models import Pais, Uf, Cidade
+
 
 # Register your models here.
+
+@admin.register(Pais, Uf, Cidade)
 class AdminAssinaki(admin.ModelAdmin):
-    list_display = ["pais_nome"]
-
-class Meta:
-    model = Pais
-
-admin.site.register(Pais, AdminAssinaki)
+    pass
