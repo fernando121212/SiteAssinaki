@@ -80,7 +80,7 @@ class Cliente(models.Model):
         verbose_name = 'Cliente'
         verbose_name_plural = "Clientes"
 
-class pessoa_juridica(models.Model):
+class Pessoa_juridica(models.Model):
     pj_nome = models.CharField('Nome', max_length=150)
     pj_razao_social = models.CharField('Razão social', max_length=150)
     pj_cnpj = models.CharField('CNPJ', max_length=14)
@@ -92,7 +92,7 @@ class pessoa_juridica(models.Model):
 
     class Meta:
         verbose_name = 'Pessoa juridica'
-        verbose_name_plural = "Pessoa juridicas"
+        verbose_name_plural = "Pessoas juridicas"
 
 class Login(models.Model):
     login_username = models.CharField('Login', max_length=150)
@@ -106,23 +106,7 @@ class Login(models.Model):
         verbose_name = 'Login'
         verbose_name_plural = "Logins"
 
-class Documento(models.Model):
-    documento_content = models.CharField('Documento')
-    documento_data = models.DateField('Data')
-    documento_quantidade_partes = models.CharField('Partes', max_length=11)
-    tipo_documento = models.ForeignKey('Tipo de documento', on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.documento_content
-
-    class Meta:
-        verbose_name = 'Documento'
-        verbose_name_plural = "Documentos"
-
-
-
-
-    class Assinatura(models.Model):
+class Assinatura(models.Model):
         assinatura_cod = models.CharField('Assinatura', max_length=11)
         cliente = models.ForeignKey('Cliente', on_delete=models.DO_NOTHING)
 
@@ -147,4 +131,3 @@ class Dados_cartao(models.Model):
     class Meta:
         verbose_name = 'Dados_cartao'
         verbose_name_plural = "Dados_cartao"
-
