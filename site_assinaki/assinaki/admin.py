@@ -31,3 +31,4 @@ class Rua_admin(admin.ModelAdmin):
     list_display = ['rua_nome', 'rua_numero', 'rua_complemento', 'rua_cep', 'bairro']
     list_display_links = ['bairro']
     list_select_related = ['bairro']
+
