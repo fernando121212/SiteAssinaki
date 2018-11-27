@@ -55,7 +55,7 @@ class Rua(models.Model):
     bairro = models.ForeignKey('Bairro', on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return (self.rua_nome)
+        return self.rua_nome
 
     class Meta:
         verbose_name = 'Rua'
