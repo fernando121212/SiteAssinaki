@@ -13,7 +13,7 @@ Em seguida, crie ou atualize o seu arquivo ```requerimentes.txt```
 ```sh
  pip freeze > ./requeriments.txt
 ```
-Para autualizar a partir do arquivo ```requerimentes.txt```
+Para autualizar a partir do arquivo ```requerimentes.txt```, digite:
 ```sh
  pip freeze -r ./requeriments.txt
  ```
