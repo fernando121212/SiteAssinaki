@@ -64,6 +64,7 @@ class Dados_cartao_admin(admin.ModelAdmin):
     list_display_links = ['pais']
     list_select_related = ['pais']
 
+
 @admin.register(Tipo_documento)
 class Tipo_documento_admin(admin.ModelAdmin):
     list_display = ['nome_tipo_documento']
