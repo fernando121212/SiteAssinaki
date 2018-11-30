@@ -102,5 +102,17 @@ VALUES
 (@status_doc,
 "1", "2");
 
-END
 
+SELECT * FROM documento_assinado;
+SELECT * FROM cliente;
+SELECT * FROM documento;
+
+UPDATE documento
+SET documento_quantidade_partes = 2
+WHERE id_documento = 3;
+
+SELECT cli.id_cliente,cli.cliente_nome,doca.doc_ass_status,
+doca.id_documento,documento_quantidade_partes
+FROM cliente AS cli,documento AS doc,documento_assinado AS doca
+WHERE doc.id_documento = doca.id_documento
+AND doca.id_cliente = cli.id_cliente;
