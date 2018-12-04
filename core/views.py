@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 # def index(request):
 #     context = {
-#         'title': 'assinaki',
+#         'title': 'services',
 #         'pagina_1': 'A empresa',
 #         'pagina_2': 'Produtos',
 #         'pagina_3': 'Cadastre-se',
