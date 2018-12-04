@@ -1,5 +1,4 @@
 from django.contrib import admin
-from accounts.models import Cliente
 from . models import Assinatura, Dados_cartao, Tipo_documento, Documento
 
 
