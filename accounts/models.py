@@ -1,8 +1,6 @@
 from django.db import models
 from core.models import Rua
 
-# Create your models here.
-
 class Cliente(models.Model):
     cliente_nome = models.CharField('Nome', max_length=150)
     cliente_sobrnome = models.CharField('Sobrnome', max_length=150)
