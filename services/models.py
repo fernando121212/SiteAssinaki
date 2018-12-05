@@ -1,13 +1,28 @@
 from django.db import models
 from django.db.models import ForeignKey
-from accounts.models import Cliente
-from core.models import Pais
 
-# Create your models here.
+class PrecoAssinatura(models.Model):
+        preco_base = models.DecimalField('Preço base', decimal_places=2, max_digits=8)
+        slug = models.SlugField('Identificador', max_length=150)
+
+        created = models.DateTimeField('Criado em', auto_now_add=True)
+        modified = models.DateTimeField('Modificado em', auto_now=True)
+
+        def __str__(self):
+            return self.assinatura_cod
+
+        class Meta:
+            verbose_name = 'Preço base'
+            verbose_name_plural = "Preços bases"
 
 class Assinatura(models.Model):
         assinatura_cod = models.CharField('Assinatura', max_length=11)
-        cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
+        slug = models.SlugField('Identificador', max_length=150)
+        cliente = models.ForeignKey('accounts.Cliente', verbose_name = 'Cliente', on_delete=models.DO_NOTHING)
+        preco_base = models.ForeignKey('PrecoAssinatura', verbose_name = 'Preço base', on_delete=models.DO_NOTHING)
+
+        created = models.DateTimeField('Criado em', auto_now_add=True)
+        modified = models.DateTimeField('Modificado em', auto_now=True)
 
         def __str__(self):
             return self.assinatura_cod
@@ -18,11 +33,15 @@ class Assinatura(models.Model):
 
 class Dados_cartao(models.Model):
     cartao_nome = models.CharField('Cartão', max_length=150)
+    slug = models.SlugField('Identificador', max_length=150)
     cartao_numero = models.CharField('Número', max_length=50)
     cartao_data = models.DateField('Vencimento em')
     cartao_security_cod = models.CharField('Código de segurança', max_length=10)
     cartao_password = models.CharField('Senha', max_length=150)
-    pais = models.ForeignKey(Pais, on_delete=models.DO_NOTHING)
+    pais = models.ForeignKey('core.Pais', verbose_name = 'País', on_delete=models.DO_NOTHING)
+
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
         return self.cartao_nome
@@ -33,7 +52,10 @@ class Dados_cartao(models.Model):
 
 class Tipo_documento(models.Model):
     nome_tipo_documento = models.CharField('Tipo de documento', max_length=50)
+    slug = models.SlugField('Identificador', max_length=150)
 
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
         return self.nome_tipo_documento
@@ -44,9 +66,13 @@ class Tipo_documento(models.Model):
 
 class Documento(models.Model):
     documento_content = models.CharField("Documento", max_length=150)
+    slug = models.SlugField('Identificador', max_length=150)
     documento_data = models.DateField("Disponível até")
     documento_quantidade_partes = models.IntegerField('Quantas partes')
-    tipo_documento = models.ForeignKey('Tipo_documento', on_delete=models.DO_NOTHING)
+    tipo_documento = models.ForeignKey('Tipo_documento', verbose_name = 'Tipo de documento', on_delete=models.DO_NOTHING)
+
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
         return self.documento_content
