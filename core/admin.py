@@ -33,3 +33,4 @@ class Rua_admin(admin.ModelAdmin):
     list_display_links = ['bairro']
     list_select_related = ['bairro']
     prepopulated_fields = {'slug': ('name',)}
+

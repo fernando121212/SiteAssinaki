@@ -84,3 +84,4 @@ class Release (models.Model):
     class Meta:
         verbose_name = 'Atualização'
         verbose_name_plural = "Atualizações"
+
