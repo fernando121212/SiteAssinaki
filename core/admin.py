@@ -3,31 +3,36 @@ from . models import Pais, Uf, Cidade, Bairro,Rua
 
 @admin.register(Pais)
 class Pais_admin(admin.ModelAdmin):
-    list_display = ['pais_nome']
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Uf)
 class Uf_admin(admin.ModelAdmin):
-    list_display = ['uf_nome', 'pais']
+    list_display = ['name', 'slug', 'pais']
     list_display_links = ['pais']
     list_select_related = ['pais']
+    prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Cidade)
 class Cidade_admin(admin.ModelAdmin):
-    list_display = ['cidade_nome', 'uf']
+    list_display = ['name', 'slug', 'uf']
     list_display_links = ['uf']
     list_select_related = ['uf']
+    prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Bairro)
 class Bairro_admin(admin.ModelAdmin):
-    list_display = ['bairro_nome', 'cidade']
+    list_display = ['name', 'slug', 'cidade']
     list_display_links = ['cidade']
     list_select_related = ['cidade']
+    prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Rua)
 class Rua_admin(admin.ModelAdmin):
-    list_display = ['rua_nome', 'rua_numero', 'rua_complemento', 'rua_cep', 'bairro']
+    list_display = ['name', 'slug', 'rua_numero', 'rua_complemento', 'rua_cep', 'bairro']
     list_display_links = ['bairro']
     list_select_related = ['bairro']
+    prepopulated_fields = {'slug': ('name',)}
 
 
 
