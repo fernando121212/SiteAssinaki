@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Pais, Uf, Cidade, Bairro,Rua
+from . models import Pais, Uf, Cidade, Bairro, Rua
 
 @admin.register(Pais)
 class Pais_admin(admin.ModelAdmin):

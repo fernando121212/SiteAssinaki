@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Pais(models.Model):
     name = models.CharField('Nome do país',max_length=50)
