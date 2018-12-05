@@ -85,3 +85,5 @@ class Release (models.Model):
         verbose_name = 'Atualização'
         verbose_name_plural = "Atualizações"
 
+
+
