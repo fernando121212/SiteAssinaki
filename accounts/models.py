@@ -1,7 +1,7 @@
 from django.db import models
 
 class Cliente(models.Model):
-    cliente_nome = models.CharField('Nome', max_length=150)
+    name = models.CharField('Nome do cliente', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     cliente_sobrnome = models.CharField('Sobrnome', max_length=150)
     cliente_data_nascimento = models.DateField('Data')
@@ -16,14 +16,14 @@ class Cliente(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.Cliente_nome
+        return self.name
 
     class Meta:
         verbose_name = 'Cliente'
         verbose_name_plural = "Clientes"
 
 class Pessoa_juridica(models.Model):
-    pj_nome = models.CharField('Nome', max_length=150)
+    name = models.CharField('Nome', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     pj_razao_social = models.CharField('Razão social', max_length=150)
     pj_cnpj = models.CharField('CNPJ', max_length=14)
@@ -34,14 +34,14 @@ class Pessoa_juridica(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.pj_nome
+        return self.name
 
     class Meta:
         verbose_name = 'Pessoa juridica'
         verbose_name_plural = "Pessoas juridicas"
 
 class Login(models.Model):
-    login_username = models.CharField('Login', max_length=150)
+    name = models.CharField('Login', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     login_password = models.CharField('Password', max_length=150)
     cliente = models.ForeignKey('Cliente', verbose_name = 'Cliente', on_delete=models.DO_NOTHING)
@@ -50,7 +50,7 @@ class Login(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.login_username
+        return self.name
 
     class Meta:
         verbose_name = 'Login'

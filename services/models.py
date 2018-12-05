@@ -2,21 +2,21 @@ from django.db import models
 from django.db.models import ForeignKey
 
 class PrecoAssinatura(models.Model):
-        preco_base = models.DecimalField('Preço base', decimal_places=2, max_digits=8)
+        name = models.DecimalField('Preço base', decimal_places=2, max_digits=8)
         slug = models.SlugField('Identificador', max_length=150)
 
         created = models.DateTimeField('Criado em', auto_now_add=True)
         modified = models.DateTimeField('Modificado em', auto_now=True)
 
         def __str__(self):
-            return self.assinatura_cod
+            return self.name
 
         class Meta:
             verbose_name = 'Preço base'
             verbose_name_plural = "Preços bases"
 
 class Assinatura(models.Model):
-        assinatura_cod = models.CharField('Assinatura', max_length=11)
+        name = models.CharField('Assinatura', max_length=11)
         slug = models.SlugField('Identificador', max_length=150)
         cliente = models.ForeignKey('accounts.Cliente', verbose_name = 'Cliente', on_delete=models.DO_NOTHING)
         preco_base = models.ForeignKey('PrecoAssinatura', verbose_name = 'Preço base', on_delete=models.DO_NOTHING)
@@ -25,14 +25,14 @@ class Assinatura(models.Model):
         modified = models.DateTimeField('Modificado em', auto_now=True)
 
         def __str__(self):
-            return self.assinatura_cod
+            return self.name
 
         class Meta:
             verbose_name = 'Assinatura'
             verbose_name_plural = "Assinaturas"
 
 class Dados_cartao(models.Model):
-    cartao_nome = models.CharField('Cartão', max_length=150)
+    name = models.CharField('Cartão', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     cartao_numero = models.CharField('Número', max_length=50)
     cartao_data = models.DateField('Vencimento em')
@@ -44,28 +44,28 @@ class Dados_cartao(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.cartao_nome
+        return self.name
 
     class Meta:
         verbose_name = 'Dados do cartao'
         verbose_name_plural = "Dados dos cartões"
 
 class Tipo_documento(models.Model):
-    nome_tipo_documento = models.CharField('Tipo de documento', max_length=50)
+    name = models.CharField('Tipo de documento', max_length=50)
     slug = models.SlugField('Identificador', max_length=150)
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.nome_tipo_documento
+        return self.name
 
     class Meta:
         verbose_name = 'Tipo de documento'
         verbose_name_plural = "Tipos de documentos"
 
 class Documento(models.Model):
-    documento_content = models.CharField("Documento", max_length=150)
+    name = models.CharField("Documento", max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     documento_data = models.DateField("Disponível até")
     documento_quantidade_partes = models.IntegerField('Quantas partes')
@@ -75,7 +75,7 @@ class Documento(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     def __str__(self):
-        return self.documento_content
+        return self.name
 
     class Meta:
         verbose_name = 'Documento'
