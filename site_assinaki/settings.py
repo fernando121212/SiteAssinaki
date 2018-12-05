@@ -27,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '^=*)z_whz75q+o)%zk2&$n&)1o38jfgmvtr7hh1_wbqutrj^tf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'site_assinaki.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_assinaki',
-        'USER': 'assinaki',
-        'PASSWORD': 'Azxcvb@zxcvb12',
-        'HOST': '0.0.0.0',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

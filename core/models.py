@@ -9,10 +9,6 @@ class Pais(models.Model):
     def __str__(self):
         return self.name
 
-    # @models.permalink
-    # def get_absolute_url(self):
-    #     return ('pais:detalhe', (), {'slug': self.slug})
-
     class Meta:
         verbose_name = 'País'
         verbose_name_plural = "Países"
