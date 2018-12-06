@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from core import views
+from . import views
 
 urlpatterns = [
-    # path('', views.index, name='index'),
-    # path('', views.index_light, name='index-light'),
+    path('', views.IndexView.as_view(), name='index-light'),
+    path('nos/', views.about, name='about'),
+    path('servicos/', views.services, name='services'),
+    path('clientes/', views.clients, name='clients'),
+    path('contato/', views.contact, name='contact'),
+    path('login/', views.login, name='login'),
+    path('cadastro/', views.cadastro, name='cadastro'),
+    path('formulario/', views.formulario, name='formulario'),
 ]

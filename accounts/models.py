@@ -1,5 +1,70 @@
 from django.db import models
 
+class Pais(models.Model):
+    name = models.CharField('Nome do país',max_length=50)
+    slug = models.SlugField('Identificador', max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'País'
+        verbose_name_plural = "Países"
+
+class Uf(models.Model):
+    name = models.CharField('Nome do  estado', max_length=50)
+    slug = models.SlugField('Identificador', max_length=150)
+    pais = models.ForeignKey('Pais', verbose_name = 'País', on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Estado'
+        verbose_name_plural = 'Estados'
+
+class Cidade(models.Model):
+    name = models.CharField('Nome da cidade', max_length=50)
+    slug = models.SlugField('Identificador', max_length=150)
+    uf = models.ForeignKey('Uf', verbose_name = 'Estado', on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Cidade'
+        verbose_name_plural = "Cidades"
+
+class Bairro(models.Model):
+    name = models.CharField('Nome do bairro', max_length=50)
+    slug = models.SlugField('Identificador', max_length=150)
+    cidade = models.ForeignKey('Cidade', verbose_name = 'Cidade', on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Bairro'
+        verbose_name_plural = "Bairros"
+
+class Rua(models.Model):
+    name = models.CharField('Nome da rua', max_length=150)
+    slug = models.SlugField('Identificador', max_length=150)
+    rua_numero = models.CharField('Número', max_length=10)
+    rua_complemento = models.CharField('Complemento', max_length=150)
+    rua_cep = models.CharField('CEP', max_length=50)
+    bairro = models.ForeignKey('Bairro', verbose_name = 'Bairro', on_delete=models.DO_NOTHING)
+
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Rua'
+        verbose_name_plural = 'Ruas'
+
 class Cliente(models.Model):
     name = models.CharField('Nome do cliente', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
@@ -10,7 +75,7 @@ class Cliente(models.Model):
     cliente_phone_fixo = models.CharField('Telefone fixo', max_length=50)
     cliente_cel_phone = models.CharField('Celular', max_length=50)
     cliente_cpf = models.CharField('CPF', max_length=11)
-    rua = models.ForeignKey('core.Rua', verbose_name = 'Rua', on_delete=models.DO_NOTHING)
+    rua = models.ForeignKey('Rua', verbose_name = 'Rua', on_delete=models.DO_NOTHING)
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
@@ -55,3 +120,22 @@ class Login(models.Model):
     class Meta:
         verbose_name = 'Login'
         verbose_name_plural = "Logins"
+
+class Dados_cartao(models.Model):
+    name = models.CharField('Cartão', max_length=150)
+    slug = models.SlugField('Identificador', max_length=150)
+    cartao_numero = models.CharField('Número', max_length=50)
+    cartao_data = models.DateField('Vencimento em')
+    cartao_security_cod = models.CharField('Código de segurança', max_length=10)
+    cartao_password = models.CharField('Senha', max_length=150)
+    pais = models.ForeignKey('Pais', verbose_name = 'País', on_delete=models.DO_NOTHING)
+
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Dados do cartao'
+        verbose_name_plural = "Dados dos cartões"
