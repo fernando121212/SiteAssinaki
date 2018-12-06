@@ -2,60 +2,9 @@ from django.db import models
 
 
 # Create your models here.
-class Pais(models.Model):
-    name = models.CharField('Nome do país',max_length=50)
+class Tipo_documento(models.Model):
+    name = models.CharField('Tipo de documento', max_length=50)
     slug = models.SlugField('Identificador', max_length=150)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'País'
-        verbose_name_plural = "Países"
-
-class Uf(models.Model):
-    name = models.CharField('Nome do  estado', max_length=50)
-    slug = models.SlugField('Identificador', max_length=150)
-    pais = models.ForeignKey('Pais', verbose_name = 'País', on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Estado'
-        verbose_name_plural = 'Estados'
-
-class Cidade(models.Model):
-    name = models.CharField('Nome da cidade', max_length=50)
-    slug = models.SlugField('Identificador', max_length=150)
-    uf = models.ForeignKey('Uf', verbose_name = 'Estado', on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Cidade'
-        verbose_name_plural = "Cidades"
-
-class Bairro(models.Model):
-    name = models.CharField('Nome do bairro', max_length=50)
-    slug = models.SlugField('Identificador', max_length=150)
-    cidade = models.ForeignKey('Cidade', verbose_name = 'Cidade', on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Bairro'
-        verbose_name_plural = "Bairros"
-
-class Rua(models.Model):
-    name = models.CharField('Nome da rua', max_length=150)
-    slug = models.SlugField('Identificador', max_length=150)
-    rua_numero = models.CharField('Número', max_length=10)
-    rua_complemento = models.CharField('Complemento', max_length=150)
-    rua_cep = models.CharField('CEP', max_length=50)
-    bairro = models.ForeignKey('Bairro', verbose_name = 'Bairro', on_delete=models.DO_NOTHING)
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
@@ -64,8 +13,8 @@ class Rua(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Rua'
-        verbose_name_plural = 'Ruas'
+        verbose_name = 'Tipo de documento'
+        verbose_name_plural = "Tipos de documentos"
 
 class Release (models.Model):
     name = models.CharField('Título', max_length=250)
@@ -74,6 +23,9 @@ class Release (models.Model):
     # upload = models.FileField(upload_to='uploads/%Y/%m/%d/')
     # image_path = models.FilePathField(path="/media/", match='foo.*', recursive=True)
 
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
+
     def __str__(self):
         return self.name
 
@@ -81,5 +33,30 @@ class Release (models.Model):
         verbose_name = 'Atualização'
         verbose_name_plural = "Atualizações"
 
+class PrecoAssinatura(models.Model):
+    name = models.DecimalField('Preço base', decimal_places=2, max_digits=8)
+    slug = models.SlugField('Identificador', max_length=150)
 
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Preço base'
+        verbose_name_plural = "Preços bases"
+
+class StatusPagamento(models.Model):
+    cliente = models.ForeignKey('accounts.Cliente', verbose_name='Cliente', on_delete=models.DO_NOTHING)
+    cartao = models.ForeignKey('accounts.Dados_cartao', verbose_name='4 últimos dígitos do cartão', on_delete=models.DO_NOTHING)
+
+    created = models.DateTimeField('Criado em', auto_now_add=True)
+    modified = models.DateTimeField('Modificado em', auto_now=True)
+
+    def __str__(self):
+        return self.cliente
+
+    class Meta:
+        verbose_name = 'Status do pagamento'
+        verbose_name_plural = "Status dos pagamentos"
