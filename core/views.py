@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
 # Create your views here.
-def index(request):
-    context = {
-        'title': 'services',
-        'pagina_1': 'A empresa',
-        'pagina_2': 'Produtos',
-        'pagina_3': 'Cadastre-se',
-        'pagina_4': 'Login',
-    }
-    return render(request, "index.html", context)
+# def index(request):
+#     context = {
+#         'title': 'services',
+#         'pagina_1': 'A empresa',
+#         'pagina_2': 'Produtos',
+#         'pagina_3': 'Cadastre-se',
+#         'pagina_4': 'Login',
+#     }
+#     return render(request, "index.html", context)
 
 def index_light(request):
     return render(request, "index-light.html")
@@ -32,3 +32,5 @@ def login(request):
 def cadastro(request):
     return render(request, "cadastro.html")
 
+def formulario(request):
+    return render(request, "formulario.html")
