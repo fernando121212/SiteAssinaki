@@ -32,3 +32,6 @@ def login(request):
 def cadastro(request):
     return render(request, "cadastro.html")
 
+def formulario(request):
+    return render(request, "formulario.html")
+
