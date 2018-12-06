@@ -1,18 +1,27 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, get_object_or_404
+from django.views  import generic
+
 
 # Create your views here.
-def index(request):
-    context = {
-        'title': 'services',
-        'pagina_1': 'A empresa',
-        'pagina_2': 'Produtos',
-        'pagina_3': 'Cadastre-se',
-        'pagina_4': 'Login',
-    }
-    return render(request, "index.html", context)
+# def index(request):
+#     context = {
+#         'title': 'services',
+#         'pagina_1': 'A empresa',
+#         'pagina_2': 'Serviços',
+#         'pagina_3': 'Cadastre-se',
+#         'pagina_4': 'Login',
+#     }
+#     return render(request, "index.html", context)
 
-def index_light(request):
-    return render(request, "index-light.html")
+class IndexView(generic.ListView):
+    template_name = "index-light.html"
+
+    def get_queryset(self):
+        pass
+
+# def index_light(request):
+#     return render(request, "index-light.html")
 
 def about(request):
     return render(request, "about.html")
