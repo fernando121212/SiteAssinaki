@@ -58,7 +58,6 @@ class Rua(forms.Form):
 
 class Cliente(forms.Form):
     name = forms.CharField(label='Nome do cliente', max_length=150)
-
     cliente_sobrnome = forms.CharField(label='Sobrnome', max_length=150)
     cliente_data_nascimento = forms.DateField(label='Data')
     cliente_estado_civil = forms.CharField(label='Estado civil', max_length=150)

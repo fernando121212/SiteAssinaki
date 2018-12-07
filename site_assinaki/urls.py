@@ -19,6 +19,6 @@ from core import views
 
 urlpatterns = [
     path('', include('core.urls')),
-    path('cadastro', include('accounts.urls')),
+    path('cadastro/', include('accounts.urls')),
     path('admin/', admin.site.urls),
 ]
