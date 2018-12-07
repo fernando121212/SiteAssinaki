@@ -26,21 +26,9 @@ class IndexView(generic.ListView):
 def about(request):
     return render(request, "about.html")
 
-def services(request):
-    return render(request, "services.html")
-
 def clients(request):
     return render(request, "clients.html")
 
 def contact(request):
     return render(request, "contact.html")
-
-def login(request):
-    return render(request, "login.html")
-
-def cadastro(request):
-    return render(request, "cadastro.html")
-
-def formulario(request):
-    return render(request, "formulario.html")
 
