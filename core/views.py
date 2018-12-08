@@ -14,21 +14,43 @@ from django.views  import generic
 #     }
 #     return render(request, "index.html", context)
 
-class IndexView(generic.ListView):
-    template_name = "index-light.html"
+# class IndexView(generic.ListView):
+#     template_name = "index-light.html"
+#
+#     context = {
+#         'title': 'home'
+#     }
+#
+#     # def get_context_data(self, **kwargs):
+#     #     context = super(IndexView, self).get_context_data(**kwargs)
+#     #     return context
+#
+#
+#
+#     def get_queryset(self):
+#       pass
 
-    def get_queryset(self):
-        pass
-
-# def index_light(request):
-#     return render(request, "index-light.html")
+def index_light(request):
+    context = {
+            'title': 'home'
+        }
+    return render(request, "index-light.html", context)
 
 def about(request):
-    return render(request, "about.html")
+    context = {
+        'title': 'Sobre a empresa'
+    }
+    return render(request, "about.html", context)
 
 def clients(request):
-    return render(request, "clients.html")
+    context = {
+        'title': 'clientes'
+    }
+    return render(request, "clients.html", context)
 
 def contact(request):
-    return render(request, "contact.html")
+    context = {
+        'title': 'fale!'
+    }
+    return render(request, "contact.html", context)
 

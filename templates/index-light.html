@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+ {{ title|capfirst }} | {{ block.super }}
+
 {% load static %}
 
 {% block container %}
@@ -40,43 +42,43 @@
         </div>
     </section>
 
-    <section class="text-center shadow section section-min">
-        <div id="about-counter" class="about-counter">
+    <!--<section class="text-center shadow section section-min">-->
+        <!--<div id="about-counter" class="about-counter">-->
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
-                        <div class="counter">
-                            <span class="ti-crown icon"></span>
-                            <h2 class="timer"> 250</h2>
-                            <p>Projects Finished</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
-                        <div class="counter">
-                            <span class="ti-shortcode icon"></span>
-                            <h2 class="timer">28256 </h2>
-                            <p>Line Of Coding</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">
-                        <div class="counter">
-                            <span class="ti-cup icon"></span>
-                            <h2 class="timer"> 42</h2>
-                            <p>Award Won</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="0">
-                        <div class="counter">
-                            <span class="ti-comments-smiley icon"></span>
-                            <h2 class="timer">240</h2>
-                            <p>Satisfied Clients</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!--<div class="container">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">-->
+                        <!--<div class="counter">-->
+                            <!--<span class="ti-crown icon"></span>-->
+                            <!--<h2 class="timer"> 250</h2>-->
+                            <!--<p>Projects Finished</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">-->
+                        <!--<div class="counter">-->
+                            <!--<span class="ti-shortcode icon"></span>-->
+                            <!--<h2 class="timer">28256 </h2>-->
+                            <!--<p>Line Of Coding</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 wow fadeInLeft about-counter-single" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">-->
+                        <!--<div class="counter">-->
+                            <!--<span class="ti-cup icon"></span>-->
+                            <!--<h2 class="timer"> 42</h2>-->
+                            <!--<p>Award Won</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="0">-->
+                        <!--<div class="counter">-->
+                            <!--<span class="ti-comments-smiley icon"></span>-->
+                            <!--<h2 class="timer">240</h2>-->
+                            <!--<p>Satisfied Clients</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
 
     <section id="testimonials" class="testimonials section">
         <div class="container">

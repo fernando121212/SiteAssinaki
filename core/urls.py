@@ -20,7 +20,7 @@ from . import views
 app_name = 'core'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index-light'),
+    path('', views.index_light, name='index-light'),
     path('nos/', views.about, name='about'),
     path('clientes/', views.clients, name='clients'),
     path('contato/', views.contact, name='contact'),

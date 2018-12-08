@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Contato | {{ block.super }}
+    {{ title|capfirst }} | {{ block.super }}
 {% endblock %}
 
 {% load static %}
@@ -12,7 +12,7 @@
             <div class="row">
 
                 <div class="col-md-12 contact-introduction">
-                    <h2 class="text-center">Contact us</h2>
+                    <h2 class="text-center">Fale com a gente</h2>
                     <p class="text-center inverse">Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
                 </div>
 
@@ -36,9 +36,10 @@
                 <div class="col-md-8 col-md-push-2">
                     <div class="contact-data">
                         <ul>
-                            <li><span class="ti-mobile icon"></span>+ 49 123 456 789</li>
-                            <li><span class="ti-email icon"></span>mail@examle.com</li>
-                            <li><span class="ti-skype icon"></span>@creativa</li>
+                            <li><span class="ti-mobile icon"></span>+55 71-99999-8888</li>
+                            <li><span class="ti-email icon"></span>comercial@assinaki.com</li>
+                            <li><span class="ti-skype icon"></span>@assinaki</li>
+                            <li><span class="ti-instagram icon"></span>@assinaki</li>
                         </ul>
                     </div>
 
@@ -67,9 +68,9 @@
             </div>
         </div>
 
-        <div class="google-maps">
-            <div id="map-canvas"></div>
-        </div>
+        <!--<div class="google-maps">-->
+            <!--<div id="map-canvas"></div>-->
+        <!--</div>-->
     </section>
 
 {% endblock %}
