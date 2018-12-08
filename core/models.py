@@ -19,9 +19,9 @@ class Tipo_documento(models.Model):
 class Release (models.Model):
     name = models.CharField('Título', max_length=250)
     slug = models.SlugField('Identificador', max_length=150)
-    texto = models.TextField('Conteúdo', blank=True)
-    # upload = models.FileField(upload_to='uploads/%Y/%m/%d/')
-    # image_path = models.FilePathField(path="/media/", match='foo.*', recursive=True)
+    description = models.TextField('Descrição', blank=True)
+    texto = models.TextField('Conteúdo')
+    image = models.ImageField(upload_to='images', verbose_name='Imagem', null=True, blank=True)
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)

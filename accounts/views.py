@@ -1,17 +1,10 @@
-from django.shortcuts import render
-from .forms import Cliente
-
-def cliente(request):
-    template_name = 'formulario'
-    if request.method == "POST":
-        form = Cliente(request.POST)
-    else:
-        form=cliente()
-    context = {
-        'form': form
-    }
-    return render(request,template_name, context)
-
+from django.shortcuts import render, get_object_or_404
 
 
 # Create your views here.
+
+def cadastro(request):
+    return render(request, "cadastro.html")
+
+def login(request):
+    return render(request, "login.html")
