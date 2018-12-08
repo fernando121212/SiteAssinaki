@@ -3,7 +3,11 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 
 def cadastro(request):
-    return render(request, "cadastro.html")
+    contex = {'title': 'cadastro'}
+    return render(request, "cadastro.html", contex)
 
 def login(request):
-    return render(request, "login.html")
+    contex = {'title': 'login'}
+    return render(request, "login.html", contex)
+
+
