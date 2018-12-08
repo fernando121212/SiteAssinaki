@@ -1,56 +1,50 @@
 from django import forms
 
 class Pais(forms.Form):
-    name = forms.CharField(label='Nome do país'),
+    name = forms.CharField(label='Nome do país')
+    name.widget.attrs.update({'class' : 'form-control'})
 
-
-    def __str__(self):
-        return self.name
 
     class Meta:
         verbose_name = 'País'
         verbose_name_plural = "Países"
 
 class Uf(forms.Form):
-    name = forms.CharField(label='Nome do  estado', max_length=50)
-
-
-    def __str__(self):
-        return self.name
+    name = forms.CharField(label='Nome do  estado')
+    name.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         verbose_name = 'Estado'
         verbose_name_plural = 'Estados'
 
 class Cidade(forms.Form):
-    name = forms.CharField(label='Nome da cidade', max_length=50)
-
-    def __str__(self):
-        return self.name
+    name = forms.CharField(label='Nome da cidade')
+    name.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         verbose_name = 'Cidade'
         verbose_name_plural = "Cidades"
 
 class Bairro(forms.Form):
-    name = forms.CharField(label='Nome do bairro', max_length=50)
-
-    def __str__(self):
-        return self.name
+    name = forms.CharField(label='Nome do bairro')
+    name.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         verbose_name = 'Bairro'
         verbose_name_plural = "Bairros"
 
 class Rua(forms.Form):
-    name = forms.CharField(label='Nome da rua', max_length=150)
-    rua_numero = forms.CharField(label='Número', max_length=10)
-    rua_complemento = forms.CharField(label='Complemento', max_length=150)
-    rua_cep = forms.CharField(label='CEP', max_length=50)
+    name = forms.CharField(label='Nome da rua')
+    name.widget.attrs.update({'class': 'form-control'})
 
+    rua_numero = forms.CharField(label='Número')
+    rua_numero.widget.attrs.update({'class': 'form-control'})
 
-    def __str__(self):
-        return self.name
+    rua_complemento = forms.CharField(label='Complemento')
+    rua_complemento.widget.attrs.update({'class': 'form-control'})
+
+    rua_cep = forms.CharField(label='CEP')
+    rua_cep.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         verbose_name = 'Rua'
