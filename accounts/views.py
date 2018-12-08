@@ -59,7 +59,6 @@ def cadastro(request):
         form_bairro = Bairro();
         form_rua = Rua();
 
-
     context = {
         'title': 'cadastro',
         'form_pais': form_pais,
