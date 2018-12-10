@@ -45,7 +45,7 @@ class Rua_admin(admin.ModelAdmin):
 
 @admin.register(Cliente)
 class Cliente_admin(admin.ModelAdmin):
-    list_display = ['name', 'slug','cliente_sobrnome','cliente_data_nascimento','cliente_estado_civil','cliente_email','cliente_phone_fixo','cliente_cel_phone','cliente_cpf','rua', 'created', 'modified']
+    list_display = ['name', 'slug','cliente_sobrenome','cliente_data_nascimento','cliente_estado_civil','cliente_email','cliente_phone_fixo','cliente_cel_phone','cliente_cpf','rua', 'created', 'modified']
     search_fields = ['name', 'slug', 'rua__name']
     list_filter = ['created', 'modified']
     prepopulated_fields = {'slug': ('name',)}

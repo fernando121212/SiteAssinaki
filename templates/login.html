@@ -11,23 +11,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 services-introduction">
-
-
+                    <h2 class="text-center">Login</h2>
+                    <p class="text-center inverse">Acesse sua conta por meio do seu login e senha</p>
                 </div>
             </div>
             <div class="col-md-4 col-md-push-4 ">
                         <form method="POST">
                              {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
+                            {{ form_login.non_field_errors }}
+
+                            <div class="form-group" class="form-control">
+                                {{ form_login.label_tag }}
+                                {{ form_login }}
+                                {{ form_login.errors }}
                             </div>
-							<div class="form-group">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                            </div>
+
+
                             <a href=”html://….”>Esqueceu a senha</a>
                             <br/>
                             <br/>
-                            <button type="button" id="submit" name="submit" class="btn btn-margin btn-primary btn-lg text-center">Salvar</button>
+                            <button type="submit" id="submit" name="submit" class="btn btn-margin btn-primary btn-lg text-center">Salvar</button>
                         </form>
                     </div>
         </div>
