@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro, LoginCadastro
+from .forms import Cadastro, LoginCadastro, myDate
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
+from django.shortcuts import render
 # Create your views here.
 
 # @login_required
@@ -17,6 +18,11 @@ cliente = Cliente()
 # pj = Pessoa_juridica()
 login = Login()
 # cartao = Dados_cartao
+
+def create_user(request):
+    user_form = Cliente()
+    return render(request, 'cadastro.html', {'my_form': user_form})
+# bootstrap_datepicker_plus
 
 def cadastro(request):
 
