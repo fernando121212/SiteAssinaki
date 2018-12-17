@@ -98,7 +98,6 @@ def cadastro(request):
         'title': 'cadastro',
         'form_cadastro': form_cadastro,
     }
-
     return render(request, tamplate_name, context)
 
 # def login(request):
