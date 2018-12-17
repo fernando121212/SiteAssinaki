@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro, LoginCadastro, myDate
+from .forms import Cadastro, LoginCadastro
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
@@ -16,7 +16,7 @@ bairro = Bairro()
 rua = Rua()
 cliente = Cliente()
 # pj = Pessoa_juridica()
-login = Login()
+# login = Login()
 # cartao = Dados_cartao
 
 
@@ -103,31 +103,31 @@ def cadastro(request):
 
     return render(request, tamplate_name, context)
 
-def login(request):
-
-    tamplate_name = "login.html"
-
-    if request.method == 'POST':
-        form_login = LoginCadastro(request.POST or None);
-
-        if form_login.is_valid():
-            form_data = form_login.cleaned_data
-
-            name_login = form_data.get('name_login')
-            login.name = name_login
-            login_password = form_data.get('login_password')
-            login.login_password = login_password
-            login.cliente = cliente
-            login.save()
-    else:
-        form_login = LoginCadastro()
-
-
-    context = {
-        'title': 'login',
-        'form_login': form_login,
-    }
-    return render(request, tamplate_name, context)
+# def login(request):
+#
+#     tamplate_name = "login.html"
+#
+#     if request.method == 'POST':
+#         form_login = LoginCadastro(request.POST or None);
+#
+#         if form_login.is_valid():
+#             form_data = form_login.cleaned_data
+#
+#             name_login = form_data.get('name_login')
+#             login.name = name_login
+#             login_password = form_data.get('login_password')
+#             login.login_password = login_password
+#             login.cliente = cliente
+#             login.save()
+#     else:
+#         form_login = LoginCadastro()
+#
+#
+#     context = {
+#         'title': 'login',
+#         'form_login': form_login,
+#     }
+#     return render(request, tamplate_name, context)
 
 
 

@@ -1,4 +1,7 @@
+import re
 from django.db import models
+from django.core import validators
+
 
 class Pais(models.Model):
 
@@ -149,9 +152,9 @@ class Pessoa_juridica(models.Model):
         verbose_name_plural = "Pessoas juridicas"
 
 class Login(models.Model):
-    name = models.CharField('Login', max_length=150)
+    name = models.CharField('Login', max_length=150, unique=True, validators=[validators.RegexValidator(re.compile('^[\w.@+-]+$'),'O nome de usuário pode conter letras, digitos ou os caracteres: @/./+/-/_', 'invalid')])
     slug = models.SlugField('Identificador', max_length=150)
-    login_password = models.CharField('Password', max_length=150)
+    login_password = models.CharField('Password', max_length=150, unique=True)
     cliente = models.ForeignKey('Cliente', verbose_name = 'Cliente', on_delete=models.DO_NOTHING)
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
