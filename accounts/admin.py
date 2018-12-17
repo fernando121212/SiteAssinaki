@@ -63,7 +63,7 @@ class Pessoa_admin(admin.ModelAdmin):
 
 @admin.register(Login)
 class Login_admin(admin.ModelAdmin):
-    list_display = ['name', 'slug','login_password','cliente', 'created', 'modified']
+    list_display = ['name', 'slug', 'login_password', 'cliente', 'created', 'modified']
     search_fields = ['name', 'slug', 'cliente__name']
     list_filter = ['created', 'modified']
     prepopulated_fields = {'slug': ('name',)}

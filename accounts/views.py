@@ -15,7 +15,7 @@ bairro = Bairro()
 rua = Rua()
 cliente = Cliente()
 # pj = Pessoa_juridica()
-login = Login()
+# login = Login()
 # cartao = Dados_cartao
 
 def cadastro(request):
@@ -101,31 +101,31 @@ def cadastro(request):
 
     return render(request, tamplate_name, context)
 
-def login(request):
-
-    tamplate_name = "login.html"
-
-    if request.method == 'POST':
-        form_login = LoginCadastro(request.POST or None);
-
-        if form_login.is_valid():
-            form_data = form_login.cleaned_data
-
-            name_login = form_data.get('name_login')
-            login.name = name_login
-            login_password = form_data.get('login_password')
-            login.login_password = login_password
-            login.cliente = cliente
-            login.save()
-    else:
-        form_login = LoginCadastro()
-
-
-    context = {
-        'title': 'login',
-        'form_login': form_login,
-    }
-    return render(request, tamplate_name, context)
+# def login(request):
+#
+#     tamplate_name = "login.html"
+#
+#     if request.method == 'POST':
+#         form_login = LoginCadastro(request.POST or None);
+#
+#         if form_login.is_valid():
+#             form_data = form_login.cleaned_data
+#
+#             name_login = form_data.get('name_login')
+#             login.name = name_login
+#             login_password = form_data.get('login_password')
+#             login.login_password = login_password
+#             login.cliente = cliente
+#             login.save()
+#     else:
+#         form_login = LoginCadastro()
+#
+#
+#     context = {
+#         'title': 'login',
+#         'form_login': form_login,
+#     }
+#     return render(request, tamplate_name, context)
 
 
 

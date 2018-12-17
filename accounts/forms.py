@@ -1,4 +1,9 @@
 from django import forms
+from django.core import validators
+
+
+
+
 
 class LoginCadastro(forms.Form):
 
@@ -23,7 +28,7 @@ class Cadastro(forms.Form):
     login_password.widget.attrs.update({'class': 'form-control'})
 
 
-    cliente_data_nascimento = forms.DateField(label='Data de nascimento', input_formats=['%d/%m/%Y'])
+    cliente_data_nascimento = forms.DateField(label='Data de nascimento', validators=[])
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
     SOLTEIRA = 'SLT'
