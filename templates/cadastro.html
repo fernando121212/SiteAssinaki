@@ -19,30 +19,14 @@
             </div>
 
              <div class="col-md-8 col-md-push-2 ">
-                        <form method="POST" class="form-signin">
+                        <form method="POST" >
                             {% csrf_token %}
                             {{ form_cadastro.non_field_errors }}
-
-
-                            <!--{# import bootstrap4/bootstrap3 #}-->
-                            <!--{# Embed Bootstrap CSS #}-->
-                            <!--{# Embed Bootstrap JS+jQuery #}-->
-                            <!--{{ form.media }}-->
-                            <!--{# Adds date-picker required JS and CSS #}-->
-                            <!--Esse código é do from bootstrap_datepicker_plus import DatePickerInput que -->
-                            <!--estão sendo  chmado no forms e renderisando na views, no settings está sendo adicionado tbm
-                            link do passo a passo https://pypi.org/project/django-bootstrap-datepicker-plus/-->
 
                             <div class="form-group"class="form-control">
                                 {{ form_cadastro.label_tag }}
                                 {{ form_cadastro }}
                                 {{ form_cadastro.errors }}
-
-
-                                {{ my_form.media }}
-
-
-
 
                             </div>
 

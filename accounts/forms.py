@@ -1,14 +1,6 @@
 from django import forms
 from django.forms.widgets import SelectDateWidget
 from django.contrib import admin
-from django.forms import ModelForm
-from django.contrib.auth.models import User
-from django.contrib.admin import widgets
-from bootstrap_datepicker_plus import DatePickerInput
-
-
-
-
 
 
 class myDate(admin.ModelAdmin):
@@ -43,7 +35,7 @@ class Cadastro(forms.Form):
         login_password.widget.attrs.update({'class': 'form-control'})
 
 
-        cliente_data_nascimento = forms.DateField(label='Data de nascimento',widget=DatePickerInput(format='%m/%d%Y'))
+        cliente_data_nascimento = forms.DateField(label='Data de nascimento')
         cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
 

@@ -19,10 +19,6 @@ cliente = Cliente()
 login = Login()
 # cartao = Dados_cartao
 
-def create_user(request):
-    user_form = Cliente()
-    return render(request, 'cadastro.html', {'my_form': user_form})
-# bootstrap_datepicker_plus
 
 def cadastro(request):
 
