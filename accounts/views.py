@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro, LoginCadastro
+from .forms import Cadastro
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 # @login_required
@@ -28,6 +29,9 @@ def cadastro(request):
         form_cadastro = Cadastro(request.POST or None);
 
         if form_cadastro.is_valid():
+            user = form_cadastro.save()
+            user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
+            login(request,user)
             form_data = form_cadastro.cleaned_data
 
 
@@ -92,7 +96,7 @@ def cadastro(request):
 
             cliente.save()
 
-            return redirect('accounts:cadastro')
+            return redirect('accounts:login')
     else:
         form_cadastro = Cadastro()
 
@@ -128,6 +132,7 @@ def cadastro(request):
 #         'form_login': form_login,
 #     }
 #     return render(request, tamplate_name, context)
+
 
 
 
