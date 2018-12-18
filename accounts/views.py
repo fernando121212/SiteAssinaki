@@ -31,6 +31,7 @@ def cadastro(request):
         if form_cadastro.is_valid():
             user = form_cadastro.save()
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
+            user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
             login(request,user)
             form_data = form_cadastro.cleaned_data
 

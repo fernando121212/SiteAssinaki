@@ -26,13 +26,18 @@ class Cadastro(UserCreationForm):
     cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
 
     # name_login = forms.CharField(label='Login', max_length=150)
-    # namw_login.widget.attrs.update({'class': 'form-control'})
+    # login.widget.attrs.update({'class': 'form-control'})
     #
     # login_password = forms.CharField(label='Password', max_length=150)
     # login_password.widget.attrs.update({'class': 'form-control'})
+    use_required_attribute = forms.CharField(label=('Usuário'), strip=False)
+    use_required_attribute.widget.attrs.update({'class': 'form-control'})
 
     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
     password1.widget.attrs.update({'class': 'form-control'})
+
+    password2 = forms.CharField(label=('Confirmação de senha'),strip=False, widget=forms.PasswordInput)
+    password2.widget.attrs.update({'class': 'form-control'})
 
     cliente_data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput)
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
