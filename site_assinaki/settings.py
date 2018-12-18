@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'services',
     'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -74,6 +75,13 @@ TEMPLATES = [
         },
     },
 ]
+# TEMPLATES = [
+#     {
+#
+#         'DIRS':[os.path.join(BASE_DIR, 'templates')],
+#     },
+# ]
+# LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'site_assinaki.wsgi.application'
 

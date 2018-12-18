@@ -7,6 +7,8 @@
 {% load static %}
 {% block container %}
 
+
+
 <section id="login" class="services section">
         <div class="container">
             <div class="row">
@@ -21,10 +23,11 @@
                             {% csrf_token %}
                             {{ form_cadastro.non_field_errors }}
 
-                            <div class="form-group" class="form-control">
+                            <div class="form-group"class="form-control">
                                 {{ form_cadastro.label_tag }}
                                 {{ form_cadastro }}
                                 {{ form_cadastro.errors }}
+
                             </div>
 
                             <button type="submit" id="submit" name="submit" class="btn btn-margin btn-primary btn-lg text-center">Cadastrar</button>

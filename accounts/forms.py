@@ -1,6 +1,9 @@
 from django import forms
+from django.db import models
 from django.core import validators
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.admin import User
+
 
 
 
@@ -14,7 +17,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 #     login_password = forms.CharField(label='Password', max_length=150)
 #     login_password.widget.attrs.update({'class': 'form-control'})
 
-class Cadastro(UserCreationForm, AuthenticationForm):
+class Cadastro(UserCreationForm):
 
     name_cliente = forms.CharField(label='Nome do cliente', max_length=150)
     name_cliente.widget.attrs.update({'class': 'form-control'})
@@ -23,13 +26,15 @@ class Cadastro(UserCreationForm, AuthenticationForm):
     cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
 
     # name_login = forms.CharField(label='Login', max_length=150)
-    # name_login.widget.attrs.update({'class': 'form-control'})
+    # namw_login.widget.attrs.update({'class': 'form-control'})
     #
     # login_password = forms.CharField(label='Password', max_length=150)
     # login_password.widget.attrs.update({'class': 'form-control'})
 
+    password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
+    password1.widget.attrs.update({'class': 'form-control'})
 
-    cliente_data_nascimento = forms.DateField(label='Data de nascimento', input_formats='%d/%m/%Y')
+    cliente_data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput)
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
     SOLTEIRA = 'SLT'
@@ -54,6 +59,20 @@ class Cadastro(UserCreationForm, AuthenticationForm):
 
     cliente_email = forms.EmailField(label='Email', max_length=150)
     cliente_email.widget.attrs.update({'class': 'form-control'})
+
+    def clean_email(self):
+        cliente_email = self.cleaned_data['cliente_email']
+        if User.objects.filter(cliente_email=cliente_email).exists():
+            raise forms.ValidationError("Já existe usuário com este E-mail")
+        return cliente_email
+
+
+    def save(self, commit=True):
+        user = super(Cadastro,self).save(commit=False)
+        user.cliente_email = self.cleaned_data['cliente_email']
+        if commit:
+            user.save()
+        return user
 
     cliente_phone_fixo = forms.CharField(label='Telefone fixo', max_length=50)
     cliente_phone_fixo.widget.attrs.update({'class': 'form-control'})

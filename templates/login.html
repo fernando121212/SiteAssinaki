@@ -20,14 +20,14 @@
                              {% csrf_token %}
                             {{ form.non_field_errors }}
 
-                            {% for e in form %}
+                            {% for field in form %}
                             <div class="form-group" class="form-control">
-                                {{ e.label_tag }}
-                                {{ e }}
-                                {{ e.errors }}
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {{ field.errors }}
+
                             </div>
                             {% endfor %}
-
                             <a href=”html://….”>Esqueceu a senha</a>
                             <br/>
                             <br/>
