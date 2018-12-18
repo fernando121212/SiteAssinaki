@@ -30,8 +30,7 @@ class Cadastro(UserCreationForm):
     #
     # login_password = forms.CharField(label='Password', max_length=150)
     # login_password.widget.attrs.update({'class': 'form-control'})
-    use_required_attribute = forms.CharField(label=('Usuário'), strip=False)
-    use_required_attribute.widget.attrs.update({'class': 'form-control'})
+
 
     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
     password1.widget.attrs.update({'class': 'form-control'})
