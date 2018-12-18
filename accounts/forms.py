@@ -1,4 +1,5 @@
 from django import forms
+from django.db import models
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
@@ -25,14 +26,15 @@ class Cadastro(UserCreationForm):
     cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
 
     # name_login = forms.CharField(label='Login', max_length=150)
-    # name_login.widget.attrs.update({'class': 'form-control'})
+    # namw_login.widget.attrs.update({'class': 'form-control'})
     #
     # login_password = forms.CharField(label='Password', max_length=150)
     # login_password.widget.attrs.update({'class': 'form-control'})
 
+    password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
+    password1.widget.attrs.update({'class': 'form-control'})
 
-
-    cliente_data_nascimento = forms.DateField(label='Data de nascimento', validators=[])
+    cliente_data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput)
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
     SOLTEIRA = 'SLT'
