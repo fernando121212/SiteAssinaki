@@ -34,7 +34,6 @@ def cadastro(request):
             login(request,user)
             form_data = form_cadastro.cleaned_data
 
-
             name_pais = form_data.get('name_pais')
             pais.name = name_pais
             pais.save()
