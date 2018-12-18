@@ -112,7 +112,7 @@ class Cliente(models.Model):
     name = models.CharField('Nome do cliente', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     cliente_sobrenome = models.CharField('Sobrenome', max_length=150)
-    cliente_data_nascimento = models.DateField('Data')
+    cliente_data_nascimento = models.DateField('Data de nascimento')
     cliente_estado_civil = models.CharField('Estado civil', max_length=150, choices=REGIME, default=SOLTEIRA)
     cliente_email = models.EmailField('Email', max_length=150)
     cliente_phone_fixo = models.CharField('Telefone fixo', max_length=50)

@@ -1,19 +1,20 @@
 from django import forms
 from django.core import validators
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 
 
 
-class LoginCadastro(forms.Form):
+# class LoginCadastro(forms.Form):
+#
+#     name_login = forms.CharField(label='Login', max_length=150)
+#     name_login.widget.attrs.update({'class': 'form-control'})
+#
+#     login_password = forms.CharField(label='Password', max_length=150)
+#     login_password.widget.attrs.update({'class': 'form-control'})
 
-    name_login = forms.CharField(label='Login', max_length=150)
-    name_login.widget.attrs.update({'class': 'form-control'})
-
-    login_password = forms.CharField(label='Password', max_length=150)
-    login_password.widget.attrs.update({'class': 'form-control'})
-
-class Cadastro(forms.Form):
+class Cadastro(UserCreationForm, AuthenticationForm):
 
     name_cliente = forms.CharField(label='Nome do cliente', max_length=150)
     name_cliente.widget.attrs.update({'class': 'form-control'})
@@ -21,14 +22,14 @@ class Cadastro(forms.Form):
     cliente_sobrenome = forms.CharField(label='Sobrenome', max_length=150)
     cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
 
-    name_login = forms.CharField(label='Login', max_length=150)
-    name_login.widget.attrs.update({'class': 'form-control'})
+    # name_login = forms.CharField(label='Login', max_length=150)
+    # name_login.widget.attrs.update({'class': 'form-control'})
+    #
+    # login_password = forms.CharField(label='Password', max_length=150)
+    # login_password.widget.attrs.update({'class': 'form-control'})
 
-    login_password = forms.CharField(label='Password', max_length=150)
-    login_password.widget.attrs.update({'class': 'form-control'})
 
-
-    cliente_data_nascimento = forms.DateField(label='Data de nascimento', validators=[])
+    cliente_data_nascimento = forms.DateField(label='Data de nascimento', input_formats='%d/%m/%Y')
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
     SOLTEIRA = 'SLT'
