@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+
 # Create your views here.
 
 # @login_required
@@ -25,11 +26,13 @@ def cadastro(request):
 
     tamplate_name = "cadastro.html"
 
+
     if request.method == 'POST':
         form_cadastro = Cadastro(request.POST or None);
 
         if form_cadastro.is_valid():
             user = form_cadastro.save()
+            user = authenticate(username = user.username, usuario=form_cadastro.cleaned_data['usuername'])
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
             login(request,user)
@@ -107,6 +110,7 @@ def cadastro(request):
 
     return render(request, tamplate_name, context)
 
+
 # def login(request):
 #
 #     tamplate_name = "login.html"
@@ -132,7 +136,7 @@ def cadastro(request):
 #         'form_login': form_login,
 #     }
 #     return render(request, tamplate_name, context)
-
+#
 
 
 

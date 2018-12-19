@@ -5,11 +5,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
 
 
-
-
-
-
-# class LoginCadastro(forms.Form):
+#
+# class LoginCadastro(UserCreationForm):
+#     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
+#     username.widget.attrs.update({'class': 'form-control'})
+#
+#     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
+#     password1.widget.attrs.update({'class': 'form-control'})
 #
 #     name_login = forms.CharField(label='Login', max_length=150)
 #     name_login.widget.attrs.update({'class': 'form-control'})
@@ -30,6 +32,8 @@ class Cadastro(UserCreationForm):
     #
     # login_password = forms.CharField(label='Password', max_length=150)
     # login_password.widget.attrs.update({'class': 'form-control'})
+
+
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})
 
@@ -39,7 +43,7 @@ class Cadastro(UserCreationForm):
     password2 = forms.CharField(label=('Confirmação de senha'),strip=False, widget=forms.PasswordInput)
     password2.widget.attrs.update({'class': 'form-control'})
 
-    cliente_data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput)
+    cliente_data_nascimento = forms.CharField(label='Data de nascimento',widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
     SOLTEIRA = 'SLT'
