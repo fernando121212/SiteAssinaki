@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
 
 
+
+
 #
 # class LoginCadastro(UserCreationForm):
 #     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
@@ -46,6 +48,9 @@ class Cadastro(UserCreationForm):
     cliente_data_nascimento = forms.CharField(label='Data de nascimento',widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
+
+
+
     SOLTEIRA = 'SLT'
     CASADA = 'CSD'
     SEPARADA = 'SPD'
@@ -83,13 +88,16 @@ class Cadastro(UserCreationForm):
             user.save()
         return user
 
-    cliente_phone_fixo = forms.CharField(label='Telefone fixo', max_length=50)
+    cliente_phone_fixo = forms.CharField(label='Telefone fixo', max_length=10,widget=forms.TextInput(attrs={'class': 'text span8',
+            'placeholder': '(DDD) 0000-0000', 'mask': 'fone'}))
     cliente_phone_fixo.widget.attrs.update({'class': 'form-control'})
 
-    cliente_cel_phone = forms.CharField(label='Celular', max_length=50)
+    cliente_cel_phone = forms.CharField(label='Celular', max_length=11,widget=forms.TextInput(attrs={'class': 'text span8',
+            'placeholder': '(DDD) 00000-000', 'mask': 'fone'}))
     cliente_cel_phone.widget.attrs.update({'class': 'form-control'})
 
-    cliente_cpf = forms.CharField(label='CPF', max_length=11)
+    cliente_cpf = forms.CharField(label='CPF', max_length=11,widget=forms.TextInput(attrs={'class': 'text span8',
+            'placeholder': '000.000.000-00', 'mask': 'fone'}))
     cliente_cpf.widget.attrs.update({'class': 'form-control'})
 
     BRASIL = 'BR'
@@ -113,7 +121,8 @@ class Cadastro(UserCreationForm):
     name_uf = forms.ChoiceField(label='Nome do  estado', choices=ESTADOS)
     name_uf.widget.attrs.update({'class': 'form-control'})
 
-    rua_cep = forms.CharField(label='CEP', max_length=15)
+    rua_cep = forms.CharField(label='CEP', max_length=8,widget=forms.TextInput(attrs={'class': 'text span8',
+            'placeholder': '0000-0000', 'mask': 'cep'}))
     rua_cep.widget.attrs.update({'class': 'form-control'})
 
     RIO_BRANCO = 'RBR'
