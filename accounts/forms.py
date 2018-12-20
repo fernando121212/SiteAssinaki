@@ -3,23 +3,24 @@ from django.db import models
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
+from django.contrib.auth.views import LoginView
 
 
 
 
 #
-# class LoginCadastro(UserCreationForm):
+# class LoginCadastro(LoginView):
+#
+#
 #     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
 #     username.widget.attrs.update({'class': 'form-control'})
 #
 #     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
 #     password1.widget.attrs.update({'class': 'form-control'})
-#
-#     name_login = forms.CharField(label='Login', max_length=150)
-#     name_login.widget.attrs.update({'class': 'form-control'})
-#
-#     login_password = forms.CharField(label='Password', max_length=150)
-#     login_password.widget.attrs.update({'class': 'form-control'})
+    #
+    # password2 = forms.CharField(disabled=True, label=('Confirmação de senha'), strip=False, widget=forms.PasswordInput)
+    # password2.widget.attrs.update({'class': 'form-control'})
+
 
 class Cadastro(UserCreationForm):
 
@@ -48,16 +49,12 @@ class Cadastro(UserCreationForm):
     cliente_data_nascimento = forms.CharField(label='Data de nascimento',widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
-
-
-
     SOLTEIRA = 'SLT'
     CASADA = 'CSD'
     SEPARADA = 'SPD'
     DIVORCIADA = 'DVD'
     VIUVA = 'VUV'
     UNIAO_ESTAVEL = 'UET'
-
 
     REGIME = (
         (SOLTEIRA, 'Solteira(o)'),
@@ -122,7 +119,7 @@ class Cadastro(UserCreationForm):
     name_uf.widget.attrs.update({'class': 'form-control'})
 
     rua_cep = forms.CharField(label='CEP', max_length=8,widget=forms.TextInput(attrs={'class': 'text span8',
-            'placeholder': '0000-0000', 'mask': 'cep'}))
+            'placeholder': '00000-000', 'mask': 'cep'}))
     rua_cep.widget.attrs.update({'class': 'form-control'})
 
     RIO_BRANCO = 'RBR'

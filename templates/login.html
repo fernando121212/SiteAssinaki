@@ -20,7 +20,7 @@
                              {% csrf_token %}
                             {{ form.non_field_errors }}
 
-                            {% for field in form %}
+                                {% for field in form %}
                             <div class="form-group" class="form-control">
                                 {{ field.label_tag }}
                                 {{ field }}
