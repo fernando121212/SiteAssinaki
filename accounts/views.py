@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login
 #     return render(request, 'contas/dashboard.html')
 
 pais = Pais()
+
 uf = Uf()
 cidade = Cidade()
 bairro = Bairro()
@@ -32,9 +33,9 @@ def cadastro(request):
 
         if form_cadastro.is_valid():
             user = form_cadastro.save()
-            user = authenticate(username = user.username, usuario=form_cadastro.cleaned_data['usuername'])
+            # user = authenticate(username = user.username, username=form_cadastro.cleaned_data['username'])
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
-            user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
+            # user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
             login(request,user)
             form_data = form_cadastro.cleaned_data
 
