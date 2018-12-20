@@ -11,4 +11,5 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('login/', login.LoginView.as_view(template_name = 'login.html'), name='login'),
     path('sair/', logout.LogoutView.as_view(next_page = 'core:index-light'), name='logout'),
+
 ]
