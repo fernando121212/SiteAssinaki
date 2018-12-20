@@ -155,3 +155,9 @@ try:
     from . local_settings import *
 except ImportError:
     pass
+
+#Auth
+LOGIN_URL = 'conta:login'
+LOGIN_REDIRECT_URL = 'servico:services'
+LOGOUT_URL = 'conta:logout'
+# AUTH_USER_MODEL = 'conta.User'
