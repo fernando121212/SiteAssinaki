@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro#, LoginCadastro
+from .forms import Cadastro
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate,login
 
 # Create your views here.
 
@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login
 #     return render(request, 'contas/dashboard.html')
 
 pais = Pais()
+
 uf = Uf()
 cidade = Cidade()
 bairro = Bairro()
@@ -32,8 +33,9 @@ def cadastro(request):
 
         if form_cadastro.is_valid():
             user = form_cadastro.save()
+            # user = authenticate(username = user.username, username=form_cadastro.cleaned_data['username'])
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
-
+            # user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
             login(request,user)
             form_data = form_cadastro.cleaned_data
 
@@ -70,6 +72,7 @@ def cadastro(request):
             rua.rua_complemento = rua_complemento
             rua.save()
 
+
             cliente.rua = rua
             name_cliente = form_data.get('name_cliente' )
             cliente.name = name_cliente
@@ -97,7 +100,7 @@ def cadastro(request):
 
             cliente.save()
 
-            return redirect('core:index-light')
+            return redirect('accounts:login')
     else:
         form_cadastro = Cadastro()
 
@@ -117,14 +120,14 @@ def cadastro(request):
 #         form_login = LoginCadastro(request.POST or None);
 #
 #         if form_login.is_valid():
-#             user = form_login.save()
-#             user = authenticate(username = user.username, usuario=form_login.cleaned_data['usuername'])
-#             print("usuário", user)
-#             user = authenticate(username = user.username, password=form_login.cleaned_data['password1'])
-#             print("password", user)
 #             form_data = form_login.cleaned_data
 #
-#             return redirect('servico:services')
+#             name_login = form_data.get('name_login')
+#             login.name = name_login
+#             login_password = form_data.get('login_password')
+#             login.login_password = login_password
+#             login.cliente = cliente
+#             login.save()
 #     else:
 #         form_login = LoginCadastro()
 #
@@ -134,7 +137,7 @@ def cadastro(request):
 #         'form_login': form_login,
 #     }
 #     return render(request, tamplate_name, context)
-
+#
 
 
 
