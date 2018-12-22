@@ -4,16 +4,12 @@ from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
 
+class LoginCadastro(forms.Form):
+    username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
+    username.widget.attrs.update({'class': 'form-control'})
 
-
-
-
-# class LoginCadastro(UserCreationForm):
-#     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
-#     username.widget.attrs.update({'class': 'form-control'})
-#
-#     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
-#     password1.widget.attrs.update({'class': 'form-control'})
+    password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
+    password1.widget.attrs.update({'class': 'form-control'})
 
 #     name_login = forms.CharField(label='Login', max_length=150)
 #     name_login.widget.attrs.update({'class': 'form-control'})

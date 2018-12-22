@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro
+from .forms import Cadastro, LoginCadastro
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
@@ -23,6 +23,44 @@ cliente = Cliente()
 # cartao = Dados_cartao
 
 
+
+def login(request):
+
+    # tamplate_name = "login.html"
+    # tamplate_name só está chamando no cadastro.html sendo que o correto é login.html
+    tamplate_name = "cadastro.html"
+
+    if request.method == 'POST':
+        form_login = LoginCadastro(request.POST or None);
+
+        if form_login.is_valid():
+
+            form_data = form_login.cleaned_data
+
+            name_login = form_data.get('name_login')
+            login.name = name_login
+            login_password = form_data.get('login_password')
+            login.login_password = login_password
+            login.cliente = cliente
+            login.save()
+
+    else:
+        form_login = LoginCadastro()
+
+
+    context = {
+        'title': 'cadastro',
+        'form_cadastro': form_login,
+
+        #  O correto é usar dessa forma mas só está chamando usando da forma que esta acima , se vc resolver comenta o que fez pf
+        # 'title': 'login',
+        # 'form_login': form_login,
+
+    }
+    return render(request, tamplate_name, context)
+
+
+
 def cadastro(request):
 
     tamplate_name = "cadastro.html"
@@ -33,9 +71,7 @@ def cadastro(request):
 
         if form_cadastro.is_valid():
             user = form_cadastro.save()
-            # user = authenticate(username = user.username, username=form_cadastro.cleaned_data['username'])
             user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password1'])
-            # user = authenticate(username = user.username, password=form_cadastro.cleaned_data['password2'])
             login(request,user)
             form_data = form_cadastro.cleaned_data
 
@@ -112,32 +148,8 @@ def cadastro(request):
     return render(request, tamplate_name, context)
 
 
-# def login(request):
-#
-#     tamplate_name = "login.html"
-#
-#     if request.method == 'POST':
-#         form_login = LoginCadastro(request.POST or None);
-#
-#         if form_login.is_valid():
-#             form_data = form_login.cleaned_data
-#
-#             name_login = form_data.get('name_login')
-#             login.name = name_login
-#             login_password = form_data.get('login_password')
-#             login.login_password = login_password
-#             login.cliente = cliente
-#             login.save()
-#     else:
-#         form_login = LoginCadastro()
-#
-#
-#     context = {
-#         'title': 'login',
-#         'form_login': form_login,
-#     }
-#     return render(request, tamplate_name, context)
-#
+
+
 
 
 
