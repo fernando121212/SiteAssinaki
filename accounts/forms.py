@@ -3,34 +3,51 @@ from django.db import models
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
+from django.core.mail import send_mail
+from django.conf import settings
 
-class LoginCadastro(forms.Form):
+
+
+# class Email(forms.Form):
+#
+#     # name = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
+#     # name.widget.attrs.update({'class': 'form-control'})
+#
+#     email = forms.EmailField(label='Email', max_length=150)
+#     email.widget.attrs.update({'class': 'form-control'})
+#
+#     # messagem = forms.CharField(label='Mensagem/Dúvidas', widget=forms.Textarea)
+#     # messagem.widget.attrs.update({'class': 'form-control'})
+#
+#     def send_mail(self):
+#         subject = 'assunto'
+#         message = 'msg'
+#         context = {
+#             # 'name':self.cleaned_data['name_login'],
+#             'email':self.cleaned_data['cliente_email'],
+#             # 'message':self.cleaned_data['message']
+#         }
+#         message = message % context
+#         send_mail(subject,message,settings.DEFAULT_FROM_EMAIL,[settings.CONTACT_EMAIL])
+#
+class LoginCadastro(UserCreationForm):
+
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})
 
     password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
     password1.widget.attrs.update({'class': 'form-control'})
 
-#     name_login = forms.CharField(label='Login', max_length=150)
-#     name_login.widget.attrs.update({'class': 'form-control'})
-#
-#     login_password = forms.CharField(label='Password', max_length=150)
-#     login_password.widget.attrs.update({'class': 'form-control'})
+
 
 class Cadastro(UserCreationForm):
+
 
     name_cliente = forms.CharField(label='Nome do cliente', max_length=150)
     name_cliente.widget.attrs.update({'class': 'form-control'})
 
     cliente_sobrenome = forms.CharField(label='Sobrenome', max_length=150)
     cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
-
-    # name_login = forms.CharField(label='Login', max_length=150)
-    # login.widget.attrs.update({'class': 'form-control'})
-    #
-    # login_password = forms.CharField(label='Password', max_length=150)
-    # login_password.widget.attrs.update({'class': 'form-control'})
-
 
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})
@@ -92,6 +109,7 @@ class Cadastro(UserCreationForm):
             'placeholder': '(DDD) 00000-000', 'mask': 'fone'}))
     cliente_cel_phone.widget.attrs.update({'class': 'form-control'})
 
+
     cliente_cpf = forms.CharField(label='CPF', max_length=11,widget=forms.TextInput(attrs={'class': 'text span8',
             'placeholder': '000.000.000-00', 'mask': 'fone'}))
     cliente_cpf.widget.attrs.update({'class': 'form-control'})
@@ -145,6 +163,8 @@ class Cadastro(UserCreationForm):
 
     rua_complemento = forms.CharField(label='Complemento', max_length=150)
     rua_complemento.widget.attrs.update({'class': 'form-control'})
+
+
 
 
     #     name_pj = forms.CharField(label='Nome', max_length=150)

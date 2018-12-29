@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Cadastro, LoginCadastro
+from django.shortcuts import redirect, get_object_or_404
+from .forms import Cadastro,LoginCadastro
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.shortcuts import render
 from django.contrib.auth import authenticate,login
+
+
+
 
 # Create your views here.
 
@@ -22,13 +25,31 @@ cliente = Cliente()
 # login = Login()
 # cartao = Dados_cartao
 
+# def details(request):
+#     # course = get_object_or_404(cadastro,slug=slug )
+#     context = {}
+#
+#     if request.method == 'POST':
+#         form_cadastro = Email(request.POST);
+#
+#         if form_cadastro.is_valid():
+#             context['is_valid'] = True
+#             form_cadastro.send_mail()
+#             # form_cadastro = Email()
+#     else:
+#         form_cadastro = Email()
+#         context['form_login'] = form_cadastro
+#         # context['course'] = course
+#         tamplate_name = 'login.html'
+#
+#     return render(request, tamplate_name, context)
 
 
 def login(request):
 
     # tamplate_name = "login.html"
     # tamplate_name só está chamando no cadastro.html sendo que o correto é login.html
-    tamplate_name = "cadastro.html"
+    tamplate_name = 'login.html'
 
     if request.method == 'POST':
         form_login = LoginCadastro(request.POST or None);
@@ -49,8 +70,8 @@ def login(request):
 
 
     context = {
-        'title': 'cadastro',
-        'form_cadastro': form_login,
+        'title': 'login',
+        'form_login': form_login,
 
         #  O correto é usar dessa forma mas só está chamando usando da forma que esta acima , se vc resolver comenta o que fez pf
         # 'title': 'login',
@@ -133,6 +154,7 @@ def cadastro(request):
 
             cpf = form_data.get('cliente_cpf')
             cliente.cliente_cpf = cpf
+
 
             cliente.save()
 
