@@ -44,15 +44,15 @@
                     <li><a href="{% url 'conta:cadastro' %}">Cadastrar</a>
                     </li>
 
-                    {%if user.is_authenticated %}
+                    <!--{%if user.is_authenticated %}-->
                     <li><a href="{% url 'conta:logout' %}">Sair</a>
                     </li>
                     <li><a href="{% url 'servico:services' %}">Services</a>
                     </li>
-                    {% else %}
+                    <!--{% else %}-->
                     <li><a href="{% url 'conta:login' %}">Entrar</a>
                     </li>
-                    {% endif %}
+                    <!--{% endif %}-->
 
                 </ul>
             </div>

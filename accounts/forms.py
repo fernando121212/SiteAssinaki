@@ -3,8 +3,10 @@ from django.db import models
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.models import User
 
 
 
@@ -30,13 +32,13 @@ from django.conf import settings
 #         message = message % context
 #         send_mail(subject,message,settings.DEFAULT_FROM_EMAIL,[settings.CONTACT_EMAIL])
 #
-class LoginCadastro(forms.Form):
+class LoginForm(forms.Form):
 
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})
 
-    password1 = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
-    password1.widget.attrs.update({'class': 'form-control'})
+    password = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
+    password.widget.attrs.update({'class': 'form-control'})
 
 
 

@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, get_object_or_404
-from .forms import Cadastro,LoginCadastro
+from .forms import Cadastro,LoginForm
 from django.contrib.auth.decorators import login_required
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
-from django.shortcuts import render
 from django.contrib.auth import authenticate,login
+from django.shortcuts import render
+from django.http import HttpResponse
 
 
 
@@ -45,37 +46,56 @@ cliente = Cliente()
 #     return render(request, tamplate_name, context)
 
 
-def login(request):
+# def login(request):
+#
+#     tamplate_name = 'login.html'
+#
+#     if request.method == 'POST':
+#         form_login = LoginCadastro(request.POST or None);
+#
+#         if form_login.is_valid():
+#
+#             form_data = form_login.cleaned_data
+#
+#             username = form_data.get('username')
+#             login.username = username
+#             password = form_data.get('password')
+#             login.password = password
+#             login.cliente = cliente
+#             # login.save()
+#             # return redirect('accounts:cadastro')
+#
+#     else:
+#         form_login = LoginCadastro()
+#
+#
+#     context = {
+#         'title': 'login',
+#         'form_login': form_login,
+#
+#
+#     }
+#     return render(request, tamplate_name, context)
 
-    tamplate_name = 'login.html'
-
+def form_login(request):
     if request.method == 'POST':
-        form_login = LoginCadastro(request.POST or None);
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'],
+                   password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
 
-        if form_login.is_valid():
-
-            form_data = form_login.cleaned_data
-
-            name_login = form_data.get('name_login')
-            login.name = name_login
-            login_password = form_data.get('login_password')
-            login.login_password = login_password
-            login.cliente = cliente
-            login.save()
-            return redirect('accounts:login')
-
+                    return redirect('accounts:login')
+                else:
+                    return HttpResponse('Desabilitar account')
+            else:
+                return HttpResponse('Login Inválido')
     else:
-        form_login = LoginCadastro()
-
-
-    context = {
-        'title': 'login',
-        'form_login': form_login,
-
-
-    }
-    return render(request, tamplate_name, context)
-
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def cadastro(request):

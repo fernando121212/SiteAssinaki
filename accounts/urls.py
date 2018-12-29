@@ -9,7 +9,7 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
-    path('login/', views.login, name='login'),
+    path('login/', views.form_login, name='login'),
     # path('login/', views.details, name='login
 
     # path('cadastro/', login.LoginView.as_view(template_name = 'cadastro.html'), name='cadastro'),
