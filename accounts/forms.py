@@ -30,7 +30,7 @@ from django.conf import settings
 #         message = message % context
 #         send_mail(subject,message,settings.DEFAULT_FROM_EMAIL,[settings.CONTACT_EMAIL])
 #
-class LoginCadastro(UserCreationForm):
+class LoginCadastro(forms.Form):
 
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})

@@ -47,8 +47,6 @@ cliente = Cliente()
 
 def login(request):
 
-    # tamplate_name = "login.html"
-    # tamplate_name só está chamando no cadastro.html sendo que o correto é login.html
     tamplate_name = 'login.html'
 
     if request.method == 'POST':
@@ -64,6 +62,7 @@ def login(request):
             login.login_password = login_password
             login.cliente = cliente
             login.save()
+            return redirect('accounts:login')
 
     else:
         form_login = LoginCadastro()
@@ -73,9 +72,6 @@ def login(request):
         'title': 'login',
         'form_login': form_login,
 
-        #  O correto é usar dessa forma mas só está chamando usando da forma que esta acima , se vc resolver comenta o que fez pf
-        # 'title': 'login',
-        # 'form_login': form_login,
 
     }
     return render(request, tamplate_name, context)
