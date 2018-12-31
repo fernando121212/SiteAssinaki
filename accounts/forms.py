@@ -2,36 +2,23 @@ from django import forms
 from django.db import models
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.admin import User
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 
 
+class Email(forms.Form):
+    email = forms.EmailField(label='Email', max_length=150)
+    email.widget.attrs.update({'class': 'form-control'})
+    def enviar_email(self):
+        subject = 'Seja bem vindo a nosso site'
+        message = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
+        email_from = settings.EMAIL_HOST_USER
+        email = ['fernandoti@live.com']
+        send_mail(subject, message, email_from,email)
 
-# class Email(forms.Form):
-#
-#     # name = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
-#     # name.widget.attrs.update({'class': 'form-control'})
-#
-#     email = forms.EmailField(label='Email', max_length=150)
-#     email.widget.attrs.update({'class': 'form-control'})
-#
-#     # messagem = forms.CharField(label='Mensagem/Dúvidas', widget=forms.Textarea)
-#     # messagem.widget.attrs.update({'class': 'form-control'})
-#
-#     def send_mail(self):
-#         subject = 'assunto'
-#         message = 'msg'
-#         context = {
-#             # 'name':self.cleaned_data['name_login'],
-#             'email':self.cleaned_data['cliente_email'],
-#             # 'message':self.cleaned_data['message']
-#         }
-#         message = message % context
-#         send_mail(subject,message,settings.DEFAULT_FROM_EMAIL,[settings.CONTACT_EMAIL])
-#
+
+
 class LoginForm(forms.Form):
 
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)

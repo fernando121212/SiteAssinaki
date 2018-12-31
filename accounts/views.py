@@ -1,11 +1,9 @@
 from django.shortcuts import redirect, get_object_or_404
-from .forms import Cadastro,LoginForm
-from django.contrib.auth.decorators import login_required
+from .forms import Cadastro,LoginForm,Email
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Login, Dados_cartao
 from django.contrib.auth import authenticate,login
 from django.shortcuts import render
 from django.http import HttpResponse
-
 
 
 
@@ -26,24 +24,25 @@ cliente = Cliente()
 # login = Login()
 # cartao = Dados_cartao
 
-# def details(request):
-#     # course = get_object_or_404(cadastro,slug=slug )
-#     context = {}
-#
-#     if request.method == 'POST':
-#         form_cadastro = Email(request.POST);
-#
-#         if form_cadastro.is_valid():
-#             context['is_valid'] = True
-#             form_cadastro.send_mail()
-#             # form_cadastro = Email()
-#     else:
-#         form_cadastro = Email()
-#         context['form_login'] = form_cadastro
-#         # context['course'] = course
-#         tamplate_name = 'login.html'
-#
-#     return render(request, tamplate_name, context)
+
+
+def email_cadastro(request):
+    tamplate_name = 'login.html'
+    context = {}
+    if request.method == 'POST':
+        form = Email(request.POST)
+        if form.is_valid():
+
+             context['is_valid'] = True
+             form = Email()
+             form.enviar_email()
+
+        return redirect('accounts:login')
+
+    else:
+        form = Email()
+        context['form'] = form
+    return render(request, tamplate_name, context)
 
 
 # def login(request):

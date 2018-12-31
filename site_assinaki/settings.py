@@ -163,12 +163,11 @@ LOGOUT_URL = 'conta:logout'
 # AUTH_USER_MODEL = 'conta.User'
 
 
-EMAIL_BACKEND = 'django.core.email.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'email@gmail.com'
-EMAIL_HOST_PASSWORD = 'senha'
+EMAIL_HOST_USER = 'assinakiki'
+EMAIL_HOST_PASSWORD = 'Azxcvb@zxcvb12'
 EMAIL_PORT = 587
-
-CONTACT_EMAIL = 'fernando.fg117@gmail.com'
+CONTACT_EMAIL = 'assinakiki@mail.com'
