@@ -8,14 +8,21 @@ from django.contrib.auth.models import User
 
 
 class Email(forms.Form):
-    email = forms.EmailField(label='Email', max_length=150)
+    email = forms.EmailField(label='Digite seu E-mail', max_length=150)
     email.widget.attrs.update({'class': 'form-control'})
-    def enviar_email(self):
+    def enviarEmailCadastro(self):
         subject = 'Seja bem vindo a nosso site'
-        message = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
+        mensagem1 = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
         email_from = settings.EMAIL_HOST_USER
         email = ['fernandoti@live.com']
-        send_mail(subject, message, email_from,email)
+        send_mail(subject, mensagem1, email_from,email)
+    def enviarEmailSenha(self):
+        subject = 'Seja bem vindo a nosso site'
+        mensagem2 = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
+        email_form = settings.EMAIL_HOST_USER
+        email = ['fernandoti@live.com']
+        send_mail(subject,mensagem2,email_form,email)
+
 
 
 

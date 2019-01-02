@@ -14,7 +14,8 @@
             <div class="row">
                 <div class="col-md-12 services-introduction">
                     <!--<h2 class="text-center">Login</h2>-->
-                    <!--<p class="text-center inverse">Acesse sua conta por meio do seu login e senha</p>-->
+
+                    <p class="text-center inverse">Acesse sua conta por meio do seu login e senha</p>
                 </div>
             </div>
 
@@ -46,10 +47,10 @@
 
 
                             </div>
-                            <a href=”form”>Esqueceu a senha</a>
+                            <a href="{% url 'conta:enviar_email_senha' %}">Esqueceu a senha</a>
                             <br/>
                             <br/>
-                            <a href=”html://….”>Criar conta</a>
+                            <a href="{% url 'conta:enviar_email_cadastro' %}">Criar conta</a>
                             <br/>
                             <br/>
 

@@ -27,7 +27,7 @@ cliente = Cliente()
 
 
 def email_cadastro(request):
-    tamplate_name = 'login.html'
+    tamplate_name = 'enviar_email_cadastro.html'
     context = {}
     if request.method == 'POST':
         form = Email(request.POST)
@@ -35,13 +35,31 @@ def email_cadastro(request):
 
              context['is_valid'] = True
              form = Email()
-             form.enviar_email()
+             form.enviarEmailCadastro()
 
-        return redirect('accounts:login')
+        return redirect('accounts:enviar_email_cadastro')
 
     else:
         form = Email()
-        context['form'] = form
+        context['enviar_email_cadastro'] = form
+    return render(request, tamplate_name, context)
+
+def email_senha(request):
+    tamplate_name = 'enviar_email_senha.html'
+    context = {}
+    if request.method == 'POST':
+        form = Email(request.POST)
+        if form.is_valid():
+
+             context['is_valid'] = True
+             form = Email()
+             form.enviarEmailsenha()
+
+        return redirect('accounts:enviar_email_senha')
+
+    else:
+        form = Email()
+        context['enviar_email_senha'] = form
     return render(request, tamplate_name, context)
 
 
