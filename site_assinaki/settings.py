@@ -14,6 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -132,14 +133,9 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(db_from_env)
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATABASES['default'] = dj_database_url.config('postgres://...', conn_max_age=600, ssl_require=True)
 
 django_heroku.settings(locals())
 
@@ -152,14 +148,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.live.com'
-# EMAIL_HOST_USER = 'assinaki'
-# EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
-# EMAIL_PORT = 465
-# CONTACT_EMAIL = 'assinaki@hotmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_HOST_USER = 'assinaki'
+EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+EMAIL_PORT = 465
+CONTACT_EMAIL = 'assinaki@hotmail.com'
 
 
 try:
