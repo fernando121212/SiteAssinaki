@@ -1,1 +1,1 @@
-web: gunicorn site_assinaki.wsgi --log-file-
+web: gunicorn site_assinaki.wsgi --log-file -
