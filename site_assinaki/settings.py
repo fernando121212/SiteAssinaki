@@ -29,7 +29,8 @@ SECRET_KEY = '^=*)z_whz75q+o)%zk2&$n&)1o38jfgmvtr7hh1_wbqutrj^tf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -141,7 +142,7 @@ MEDIA_URL = '/media/'
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+ALLOWED_HOSTS = ['*']
 
 
 #Auth
