@@ -36,7 +36,7 @@ def form_login(request):
                 if user.is_active:
                     login(request, user)
 
-                    return redirect('servico:services')
+                    return redirect('core:index-light')
                 else:
                     return HttpResponse('Desabilitar account')
             else:
