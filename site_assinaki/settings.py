@@ -154,7 +154,7 @@ MEDIA_URL = '/media/'
 
 #Auth
 LOGIN_URL = 'conta:login'
-LOGIN_REDIRECT_URL = 'servico:services'
+LOGIN_REDIRECT_URL = 'core:index-light'
 LOGOUT_URL = 'conta:logout'
 # AUTH_USER_MODEL = 'conta.User'
 
