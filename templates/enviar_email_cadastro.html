@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title|capfirst }} | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% block container %}
+
+<section id="login" class="services section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 services-introduction">
+                <!--<h2 class="text-center">Enviar E-mail</h2>-->
+                    <p class="text-center inverse">Digite seu e-mail e verifique o link de cadastro para acessar nosso site</p>
+                </div>
+            </div>
+
+             <div class="col-md-4 col-md-push-4 ">
+                        <form method="POST" >
+                            {% csrf_token %}
+                            {{ form_cadastro.non_field_errors }}
+
+                            <div class="form-group"class="form-control">
+
+                                 {{ enviar_email_cadastro.label_tag }}
+                                 {{ enviar_email_cadastro }}
+                                 {{ enviar_email_cadastro.errors }}
+
+                            </div>
+                            <br/>
+
+                            <button type="submit" id="submit" name="submit" class="btn btn-margin btn-primary btn-lg text-center">Enviar E-mail</button>
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+    </section>
+
+{% endblock %}
