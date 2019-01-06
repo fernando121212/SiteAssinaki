@@ -153,7 +153,6 @@ class Pessoa_juridica(models.Model):
         verbose_name = 'Pessoa juridica'
         verbose_name_plural = "Pessoas juridicas"
 
-
 class Dados_cartao(models.Model):
     bandeira = models.CharField('Bandeira do cartão', max_length=150)
     name = models.CharField('Nome completo', max_length=150)
