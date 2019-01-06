@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
 
 
@@ -137,7 +137,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
