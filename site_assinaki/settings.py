@@ -153,14 +153,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.live.com'
-EMAIL_HOST_USER = 'assinaki'
-EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
-EMAIL_PORT = 465
-CONTACT_EMAIL = 'assinaki@hotmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.live.com'
+# EMAIL_HOST_USER = 'assinaki'
+# EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+# EMAIL_PORT = 465
+# CONTACT_EMAIL = 'assinaki@hotmail.com'
 
 
 try:
