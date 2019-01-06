@@ -26,6 +26,9 @@ def email_cadastro(request):
 
 
 def form_login(request):
+
+    tamplate_name = 'login.html'
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -43,12 +46,13 @@ def form_login(request):
                 return HttpResponse('Login Inválido')
     else:
         form = LoginForm()
+
     context = {
             'title': 'login',
             'form': form,
     }
 
-    return render(request, 'login.html', context)
+    return render(request, tamplate_name, context)
 
 def cadastro(request):
 
