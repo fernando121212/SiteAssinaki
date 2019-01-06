@@ -152,12 +152,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-#Auth
-LOGIN_URL = 'conta:login'
-LOGIN_REDIRECT_URL = 'core:index-light'
-LOGOUT_URL = 'conta:logout'
-# AUTH_USER_MODEL = 'conta.User'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
