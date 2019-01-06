@@ -76,13 +76,6 @@ TEMPLATES = [
         },
     },
 ]
-# TEMPLATES = [
-#     {
-#
-#         'DIRS':[os.path.join(BASE_DIR, 'templates')],
-#     },
-# ]
-# LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'site_assinaki.wsgi.application'
 
@@ -149,12 +142,7 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
 
-try:
-    from . local_settings import *
-except ImportError:
-    pass
 
 #Auth
 LOGIN_URL = 'conta:login'
@@ -164,10 +152,19 @@ LOGOUT_URL = 'conta:logout'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'assinakiki'
-EMAIL_HOST_PASSWORD = 'Azxcvb@zxcvb12'
-EMAIL_PORT = 587
-CONTACT_EMAIL = 'assinakiki@mail.com'
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_HOST_USER = 'assinaki'
+EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+EMAIL_PORT = 465
+CONTACT_EMAIL = 'assinaki@hotmail.com'
+
+
+django_heroku.settings(locals())
+try:
+    from . local_settings import *
+except ImportError:
+    pass
+
+

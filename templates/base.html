@@ -41,18 +41,18 @@
                     </li>
                     <li><a href="{% url 'core:contact' %}">Contato</a>
                     </li>
-                    <li><a href="{% url 'conta:cadastro' %}">Cadastrar</a>
+                    <li><a href="{% url 'servico:services' %}">Serviços</a>
                     </li>
 
-                    <!--{%if user.is_authenticated %}-->
-                    <li><a href="{% url 'conta:logout' %}">Sair</a>
+                    {%if user.is_authenticated %}
+                    <li><a href="{% url 'conta:logout' %}">{{ user }}</a>
                     </li>
-                    <li><a href="{% url 'servico:services' %}">Services</a>
+                    {% else %}
+                    <li><a href="{% url 'conta:cadastro' %}">Cadastrar</a>
                     </li>
-                    <!--{% else %}-->
                     <li><a href="{% url 'conta:login' %}">Entrar</a>
                     </li>
-                    <!--{% endif %}-->
+                    {% endif %}
 
                 </ul>
             </div>

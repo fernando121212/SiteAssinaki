@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cliente, Pessoa_juridica, Dados_cartao, Login, Pais, Uf, Cidade, Bairro, Rua
+from .models import Cliente, Pessoa_juridica, Dados_cartao, Pais, Uf, Cidade, Bairro, Rua
 
 # Register your models here.
 
@@ -36,7 +36,7 @@ class Bairro_admin(admin.ModelAdmin):
 @admin.register(Rua)
 class Rua_admin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'rua_numero', 'rua_complemento', 'rua_cep', 'bairro', 'created', 'modified']
-    search_fields = ['name', 'slug', 'bairro__name']
+    search_fields = ['name', 'rua_cep', 'slug', 'bairro__name']
     list_filter = ['created', 'modified']
     prepopulated_fields = {'slug': ('name',)}
     list_display_links = ['bairro']
@@ -45,37 +45,29 @@ class Rua_admin(admin.ModelAdmin):
 
 @admin.register(Cliente)
 class Cliente_admin(admin.ModelAdmin):
-    list_display = ['name', 'slug','cliente_sobrenome','cliente_data_nascimento','cliente_estado_civil','cliente_email','cliente_phone_fixo','cliente_cel_phone','cliente_cpf','rua', 'created', 'modified']
-    search_fields = ['name', 'slug', 'rua__name']
+    list_display = ['first_name', 'slug','last_name','cliente_data_nascimento','cliente_estado_civil','email','cliente_phone_fixo','cliente_cel_phone','cliente_cpf','rua', 'created', 'modified']
+    search_fields = ['first_name', 'slug', 'last_name', 'cliente_cpf', 'cliente_phone_fixo', 'cliente_cel_phone', 'email', 'rua__name']
     list_filter = ['created', 'modified']
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
     list_display_links = ['rua']
     list_select_related = ['rua']
 
 @admin.register(Pessoa_juridica)
 class Pessoa_admin(admin.ModelAdmin):
     list_display = ['name', 'slug','pj_razao_social','pj_cnpj','pj_insc_estadual','cliente', 'created', 'modified']
-    search_fields = ['name', 'slug', 'cliente__name']
+    search_fields = ['name', 'slug', 'pj_cnpj', 'cliente__first_name']
     list_filter = ['created', 'modified']
     prepopulated_fields = {'slug': ('name',)}
     list_display_links = ['cliente']
     list_select_related = ['cliente']
 
-@admin.register(Login)
-class Login_admin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'login_password', 'cliente', 'created', 'modified']
-    search_fields = ['name', 'slug', 'cliente__name']
-    list_filter = ['created', 'modified']
-    prepopulated_fields = {'slug': ('name',)}
-    list_display_links = ['cliente']
-    list_select_related = ['cliente']
 
 @admin.register(Dados_cartao)
 class Dados_cartao_admin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'cartao_numero', 'cartao_data', 'cartao_security_cod', 'cartao_password', 'pais', 'created', 'modified']
-    search_fields = ['name', 'slug', 'pais__name']
+    list_display = ['bandeira', 'name', 'slug', 'cartao_numero', 'cartao_data', 'cartao_security_cod', 'cartao_password', 'pais', 'created', 'modified']
+    search_fields = ['name', 'slug', 'cartao_numero' 'pais__name']
     list_filter = ['created', 'modified']
-    list_display_links = ['pais']
-    list_select_related = ['pais']
+    list_display_links = ['pais', 'name']
+    list_select_related = ['pais', 'name']
     prepopulated_fields = {'slug': ('name',)}
 

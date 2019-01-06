@@ -21,7 +21,7 @@
              <div class="col-md-4 col-md-push-4 ">
                         <form method="POST" >
                             {% csrf_token %}
-                            {{ form_cadastro.non_field_errors }}
+                            {{ form.non_field_errors }}
 
                             <div class="form-group"class="form-control">
 
@@ -46,10 +46,10 @@
 
 
                             </div>
-                            <a href=”form”>Esqueceu a senha</a>
+                            <a href="form">Esqueceu a senha</a>
                             <br/>
                             <br/>
-                            <a href=”html://….”>Criar conta</a>
+                            <a href="{% url 'conta:cadastro' %}">Criar conta</a>
                             <br/>
                             <br/>
 

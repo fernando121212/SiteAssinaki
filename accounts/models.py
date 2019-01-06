@@ -1,18 +1,20 @@
 import re
 from django.db import models
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import User
 from django.core import validators
 
 
 class Pais(models.Model):
 
-    BRASIL = 'BR'
-    ARGENTINA = 'AR'
+    BR = 'Brasil'
+    AR = 'Argentina'
     PAISES = (
-        (BRASIL, 'Brasil'),
-        (ARGENTINA, 'Argentina'),
+        (BR, 'Brasil'),
+        (AR, 'Argentina'),
     )
 
-    name = models.CharField('Nome do país',max_length=50, choices=PAISES, default=BRASIL)
+    name = models.CharField('Nome do país',max_length=50, choices=PAISES, default=BR)
     slug = models.SlugField('Identificador', max_length=150)
 
     def __str__(self):
@@ -23,11 +25,13 @@ class Pais(models.Model):
         verbose_name_plural = "Países"
 
 class Uf(models.Model):
-    BAHIA = 'BA'
+    AC = 'Acre'
+    BA = 'Bahia'
     ESTADOS = (
-        (BAHIA, 'Bahia'),
+        (AC, 'Acre'),
+        (BA, 'Bahia'),
     )
-    name = models.CharField('Nome do  estado', max_length=50, choices=ESTADOS, default=BAHIA)
+    name = models.CharField('Nome do  estado', max_length=50, choices=ESTADOS, default=BA)
     slug = models.SlugField('Identificador', max_length=150)
     pais = models.ForeignKey('Pais', verbose_name = 'País', on_delete=models.DO_NOTHING)
 
@@ -40,17 +44,17 @@ class Uf(models.Model):
 
 class Cidade(models.Model):
 
-    RIO_BRANCO = 'RBR'
-    CRUZEIRO_DO_SUL = 'CZS'
-    SALVADOR = 'SSA'
+    RBR = 'Rio Branco'
+    CZS = 'Cruzeiro do Sul'
+    SSA = 'Salvador'
 
     CIDADES = (
-        (CRUZEIRO_DO_SUL, 'Cruzeiro do Sul'),
-        (RIO_BRANCO, 'Rio Branco'),
-        (SALVADOR, 'Salvador'),
+        (CZS, 'Cruzeiro do Sul'),
+        (RBR, 'Rio Branco'),
+        (SSA, 'Salvador'),
     )
 
-    name = models.CharField('Nome da cidade', max_length=50, choices=CIDADES, default=SALVADOR)
+    name = models.CharField('Nome da cidade', max_length=50, choices=CIDADES, default=SSA)
     slug = models.SlugField('Identificador', max_length=150)
     uf = models.ForeignKey('Uf', verbose_name = 'Estado', on_delete=models.DO_NOTHING)
 
@@ -92,29 +96,28 @@ class Rua(models.Model):
         verbose_name_plural = 'Ruas'
 
 class Cliente(models.Model):
-
-    SOLTEIRA = 'SLT'
-    CASADA = 'CSD'
-    SEPARADA = 'SPD'
-    DIVORCIADA = 'DVD'
-    VIUVA = 'VUV'
-    UNIAO_ESTAVEL = 'UET'
+    SLT = 'Solteira(o)'
+    CSD = 'Casada(o)'
+    SPD = 'Separada(o)'
+    DVD = 'Divorciada(o)'
+    VUV = 'Viuva(o)'
+    UET = 'União estável'
 
     REGIME = (
-        (SOLTEIRA, 'Solteira(o)'),
-        (CASADA, 'Casada(o)'),
-        (DIVORCIADA, 'Divorciada(o)'),
-        (SEPARADA, 'Separada'),
-        (VIUVA, 'Viúva(o)'),
-        (UNIAO_ESTAVEL, 'União estável'),
+        (SLT, 'Solteira(o)'),
+        (CSD, 'Casada(o)'),
+        (DVD, 'Divorciada(o)'),
+        (SPD, 'Separada(o)'),
+        (VUV, 'Viúva(o)'),
+        (UET, 'União estável'),
     )
 
-    name = models.CharField('Nome do cliente', max_length=150)
+    first_name = models.CharField('Nome do cliente', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
-    cliente_sobrenome = models.CharField('Sobrenome', max_length=150)
+    last_name = models.CharField('Sobrenome', max_length=150)
     cliente_data_nascimento = models.DateField('Data',blank=False)
-    cliente_estado_civil = models.CharField('Estado civil', max_length=150, choices=REGIME, default=SOLTEIRA)
-    cliente_email = models.EmailField('Email', max_length=150)
+    cliente_estado_civil = models.CharField('Estado civil', max_length=150, choices=REGIME, default=SLT)
+    email = models.EmailField('Email', max_length=150)
     cliente_phone_fixo = models.CharField('Telefone fixo', max_length=50)
     cliente_cel_phone = models.CharField('Celular', max_length=50)
     cliente_cpf = models.CharField('CPF', max_length=11)
@@ -123,11 +126,10 @@ class Cliente(models.Model):
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
-
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
-        return self.name
+        return self.first_name
 
     class Meta:
         verbose_name = 'Cliente'
@@ -151,26 +153,10 @@ class Pessoa_juridica(models.Model):
         verbose_name = 'Pessoa juridica'
         verbose_name_plural = "Pessoas juridicas"
 
-class Login(models.Model):
-    name = models.CharField('Login', max_length=150, unique=True, validators=[validators.RegexValidator(re.compile('^[\w.@+-]+$'),'O nome de usuário pode conter letras, digitos ou os caracteres: @/./+/-/_', 'invalid')])
-    slug = models.SlugField('Identificador', max_length=150)
-    login_password = models.CharField('Password', max_length=150, unique=True)
-    cliente = models.ForeignKey('Cliente', verbose_name = 'Cliente', on_delete=models.DO_NOTHING)
-
-    created = models.DateTimeField('Criado em', auto_now_add=True)
-    modified = models.DateTimeField('Modificado em', auto_now=True)
-
-    USERNAME_FIELD = 'username'
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Login'
-        verbose_name_plural = "Logins"
 
 class Dados_cartao(models.Model):
-    name = models.CharField('Cartão', max_length=150)
+    bandeira = models.CharField('Bandeira do cartão', max_length=150)
+    name = models.CharField('Nome completo', max_length=150)
     slug = models.SlugField('Identificador', max_length=150)
     cartao_numero = models.CharField('Número', max_length=50)
     cartao_data = models.DateField('Vencimento em')

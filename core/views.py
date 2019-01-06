@@ -1,40 +1,20 @@
 
 from django.shortcuts import render, get_object_or_404
-from django.views  import generic
+from .models import Tipo_documento, Release,  PrecoAssinatura, StatusPagamento
 
-
-# Create your views here.
-# def index(request):
-#     context = {
-#         'title': 'services',
-#         'pagina_1': 'A empresa',
-#         'pagina_2': 'Serviços',
-#         'pagina_3': 'Cadastre-se',
-#         'pagina_4': 'Login',
-#     }
-#     return render(request, "index.html", context)
-
-# class IndexView(generic.ListView):
-#     template_name = "index-light.html"
-#
-#     context = {
-#         'title': 'home'
-#     }
-#
-#     # def get_context_data(self, **kwargs):
-#     #     context = super(IndexView, self).get_context_data(**kwargs)
-#     #     return context
-#
-#
-#
-#     def get_queryset(self):
-#       pass
 
 def index_light(request):
+
+    tamplate_name = "index-light.html"
+
     context = {
-            'title': 'home'
+            'title': 'home',
+            'tiposs_documentos': Tipo_documento.objects.all(),
+            'releases': Release.objects.all(),
+            'PrecoAssinatura': PrecoAssinatura.objects.all(),
+            'StatusPagamentos': StatusPagamento.objects.all(),
         }
-    return render(request, "index-light.html", context)
+    return render(request, tamplate_name, context)
 
 def about(request):
     context = {
