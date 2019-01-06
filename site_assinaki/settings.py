@@ -148,8 +148,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-
-
 #Auth
 LOGIN_URL = 'conta:login'
 LOGIN_REDIRECT_URL = 'servico:services'
