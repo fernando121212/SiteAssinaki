@@ -139,6 +139,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
+django_heroku.settings(locals())
+
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -162,7 +164,6 @@ EMAIL_PORT = 465
 CONTACT_EMAIL = 'assinaki@hotmail.com'
 
 
-django_heroku.settings(locals())
 try:
     from . local_settings import *
 except ImportError:
