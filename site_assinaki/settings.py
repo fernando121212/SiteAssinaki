@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
-import psycopg2
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,8 +29,7 @@ SECRET_KEY = '^=*)z_whz75q+o)%zk2&$n&)1o38jfgmvtr7hh1_wbqutrj^tf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -47,8 +46,8 @@ INSTALLED_APPS = [
 
 
 ]
-
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,8 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
 
 ROOT_URLCONF = 'site_assinaki.urls'
 
@@ -76,13 +75,7 @@ TEMPLATES = [
         },
     },
 ]
-# TEMPLATES = [
-#     {
-#
-#         'DIRS':[os.path.join(BASE_DIR, 'templates')],
-#     },
-# ]
-# LOGIN_REDIRECT_URL = '/'
+
 
 WSGI_APPLICATION = 'site_assinaki.wsgi.application'
 
@@ -134,8 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+# django_heroku.settings(locals())
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -145,29 +147,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_HOST_USER = 'assinaki'
+EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+EMAIL_PORT = 465
+CONTACT_EMAIL = 'assinaki@hotmail.com'
 
-django_heroku.settings(locals())
 
 try:
-    from . local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
 
-#Auth
-LOGIN_URL = 'conta:login'
-LOGIN_REDIRECT_URL = 'servico:services'
-LOGOUT_URL = 'conta:logout'
-# AUTH_USER_MODEL = 'conta.User'
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'assinakiki'
-EMAIL_HOST_PASSWORD = 'Azxcvb@zxcvb12'
-EMAIL_PORT = 587
-CONTACT_EMAIL = 'assinakiki@mail.com'

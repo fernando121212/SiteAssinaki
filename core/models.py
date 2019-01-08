@@ -30,8 +30,8 @@ class Release (models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Atualização'
-        verbose_name_plural = "Atualizações"
+        verbose_name = 'Conteúdo do site'
+        verbose_name_plural = "Conteúdos do site"
 
 class PrecoAssinatura(models.Model):
     name = models.DecimalField('Preço base', decimal_places=2, max_digits=8)

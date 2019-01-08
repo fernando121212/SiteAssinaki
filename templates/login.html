@@ -14,32 +14,26 @@
             <div class="row">
                 <div class="col-md-12 services-introduction">
                     <!--<h2 class="text-center">Login</h2>-->
-
-                    <p class="text-center inverse">Acesse sua conta por meio do seu login e senha</p>
+                    <!--<p class="text-center inverse">Acesse sua conta por meio do seu login e senha</p>-->
                 </div>
             </div>
 
              <div class="col-md-4 col-md-push-4 ">
                         <form method="POST" >
                             {% csrf_token %}
-                            {{ form_cadastro.non_field_errors }}
+                            {{ form.non_field_errors }}
 
                             <div class="form-group"class="form-control">
 
-                                 <!--{{ field.label_tag }}-->
-                                <!--{{ field }}-->
-                                <!--{{ field.errors }}-->
-
-                                {{ form_login.label_tag }}
-                                {{ form_login }}
-                                {{ form_login.errors }}
-
+                                 {{ form.label_tag }}
+                                 {{ form }}
+                                 {{ form.errors }}
 
                             </div>
-                            <a href="{% url 'conta:enviar_email_senha' %}">Esqueceu a senha</a>
+                            <a href="form">Esqueceu a senha</a>
                             <br/>
                             <br/>
-                            <a href="{% url 'conta:enviar_email_cadastro' %}">Criar conta</a>
+                            <a href="{% url 'conta:cadastro' %}">Criar conta</a>
                             <br/>
                             <br/>
 

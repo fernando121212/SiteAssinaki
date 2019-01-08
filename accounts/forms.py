@@ -1,3 +1,5 @@
+import email
+
 from django import forms
 from django.db import models
 from django.core import validators
@@ -5,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
+from pip._vendor.html5lib._ihatexml import normaliseCharList
 
 
 class Email(forms.Form):
@@ -35,15 +38,12 @@ class LoginForm(forms.Form):
     password.widget.attrs.update({'class': 'form-control'})
 
 
-
 class Cadastro(UserCreationForm):
+    first_name = forms.CharField(label='Nome do cliente', max_length=150)
+    first_name.widget.attrs.update({'class': 'form-control'})
 
-
-    name_cliente = forms.CharField(label='Nome do cliente', max_length=150)
-    name_cliente.widget.attrs.update({'class': 'form-control'})
-
-    cliente_sobrenome = forms.CharField(label='Sobrenome', max_length=150)
-    cliente_sobrenome.widget.attrs.update({'class': 'form-control'})
+    last_name = forms.CharField(label='Sobrenome', max_length=150)
+    last_name.widget.attrs.update({'class': 'form-control'})
 
     username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
     username.widget.attrs.update({'class': 'form-control'})
@@ -57,42 +57,37 @@ class Cadastro(UserCreationForm):
     cliente_data_nascimento = forms.CharField(label='Data de nascimento',widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     cliente_data_nascimento.widget.attrs.update({'class': 'form-control'})
 
-
-
-
-    SOLTEIRA = 'SLT'
-    CASADA = 'CSD'
-    SEPARADA = 'SPD'
-    DIVORCIADA = 'DVD'
-    VIUVA = 'VUV'
-    UNIAO_ESTAVEL = 'UET'
-
+    SLT = 'Solteira(o)'
+    CSD = 'Casada(o)'
+    SPD = 'Separada(o)'
+    DVD = 'Divorciada(o)'
+    VUV = 'Viuva(o)'
+    UET = 'União estável'
 
     REGIME = (
-        (SOLTEIRA, 'Solteira(o)'),
-        (CASADA, 'Casada(o)'),
-        (DIVORCIADA, 'Divorciada(o)'),
-        (SEPARADA, 'Separada'),
-        (VIUVA, 'Viúva(o)'),
-        (UNIAO_ESTAVEL, 'União estável'),
+        (SLT, 'Solteira(o)'),
+        (CSD, 'Casada(o)'),
+        (DVD, 'Divorciada(o)'),
+        (SPD, 'Separada(o)'),
+        (VUV, 'Viúva(o)'),
+        (UET, 'União estável'),
     )
 
     cliente_estado_civil = forms.ChoiceField(label='Estado civil', choices=REGIME)
     cliente_estado_civil.widget.attrs.update({'class': 'form-control'})
 
-    cliente_email = forms.EmailField(label='Email', max_length=150)
-    cliente_email.widget.attrs.update({'class': 'form-control'})
+    email = forms.EmailField(label='Email', max_length=150)
+    email.widget.attrs.update({'class': 'form-control'})
 
     def clean_email(self):
-        cliente_email = self.cleaned_data['cliente_email']
-        if User.objects.filter(cliente_email=cliente_email).exists():
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Já existe usuário com este E-mail")
-        return cliente_email
-
+        return email
 
     def save(self, commit=True):
         user = super(Cadastro,self).save(commit=False)
-        user.cliente_email = self.cleaned_data['cliente_email']
+        user.email = self.cleaned_data['email']
         if commit:
             user.save()
         return user
@@ -110,22 +105,22 @@ class Cadastro(UserCreationForm):
             'placeholder': '000.000.000-00', 'mask': 'fone'}))
     cliente_cpf.widget.attrs.update({'class': 'form-control'})
 
-    BRASIL = 'BR'
-    ARGENTINA = 'AR'
+    BR = 'Brasil'
+    AR = 'Argentina'
     PAISES = (
-        (BRASIL, 'Brasil'),
-        (ARGENTINA, 'Argentina'),
+        (BR, 'Brasil'),
+        (AR, 'Argentina'),
     )
 
     name_pais = forms.ChoiceField(label='Nome do país', choices=PAISES)
     name_pais.widget.attrs.update({'class' : 'form-control'})
 
-    ACRE = 'AC'
-    BAHIA = 'BA'
+    AC = 'Acre'
+    BA = 'Bahia'
 
     ESTADOS = (
-        (ACRE, 'Acre'),
-        (BAHIA, 'Bahia'),
+        (AC, 'Acre'),
+        (BA, 'Bahia'),
     )
 
     name_uf = forms.ChoiceField(label='Nome do  estado', choices=ESTADOS)
@@ -135,14 +130,14 @@ class Cadastro(UserCreationForm):
             'placeholder': '00000-000', 'mask': 'cep'}))
     rua_cep.widget.attrs.update({'class': 'form-control'})
 
-    RIO_BRANCO = 'RBR'
-    CRUZEIRO_DO_SUL = 'CZS'
-    SALVADOR = 'SSA'
+    RBR = 'Rio Branco'
+    CZS = 'Cruzeiro do Sul'
+    SSA = 'Salvador'
 
     CIDADES = (
-        (CRUZEIRO_DO_SUL, 'Cruzeiro do Sul'),
-        (RIO_BRANCO, 'Rio Branco'),
-        (SALVADOR, 'Salvador'),
+        (CZS, 'Cruzeiro do Sul'),
+        (RBR, 'Rio Branco'),
+        (SSA, 'Salvador'),
     )
 
     name_cidade = forms.ChoiceField(label='Nome da cidade', choices=CIDADES)
