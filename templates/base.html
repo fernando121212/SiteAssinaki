@@ -42,12 +42,15 @@
                     <li><a href="{% url 'core:contact' %}">Contato</a>
                     </li>
 
+
                     {%if user.is_authenticated %}
-                    <li><a href="{% url 'conta:logout' %}">{{ user }}</a>
+                    <li><a href="{% url 'conta:password_change' %}">Alterar Senha</a>
+                    </li>
+                    <li><a href="">{{ user }}</a>
+                    </li>
+                    <li><a href="{% url 'conta:logout' %}">Sair</a>
                     </li>
                     {% else %}
-                    <li><a href="{% url 'conta:cadastro' %}">Cadastrar</a>
-                    </li>
                     <li><a href="{% url 'conta:login' %}">Entrar</a>
                     </li>
                     {% endif %}
@@ -88,6 +91,7 @@ $(function() {
     //Initialize filterizr with default options
     $('.filtr-container').filterizr();
 });
+
 </script>
 </body>
 

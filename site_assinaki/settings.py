@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrapform',
 
     'core',
     'services',
@@ -59,6 +60,9 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'site_assinaki.urls'
+LOGIN_REDIRECT_URL = "core:index-light"
+
+
 
 TEMPLATES = [
     {
@@ -148,14 +152,39 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = 'Nome <assinaki@hotmail.com>'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.live.com'
+# EMAIL_HOST_USER = 'assinaki'
+# EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+# EMAIL_PORT = 465
+# CONTACT_EMAIL = 'assinaki@hotmail.com'
+
+
+# EMAIL_USE_TLS = False
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'assinakiki'
+# CONTACT_EMAIL = 'assinakiki@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Azxcvb@zxcvb12'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = 'Nome <assinakiki@gmail.com>'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.live.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'assinaki'
+# EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
+# EMAIL_USE_TLS = False
+# DEFAULT_FROM_EMAIL = 'assinaki@hotmail.com'
+
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.live.com'
-EMAIL_HOST_USER = 'assinaki'
-EMAIL_HOST_PASSWORD = 'AzxcvbAzxcvb'
-EMAIL_PORT = 465
-CONTACT_EMAIL = 'assinaki@hotmail.com'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='assinakiki@gmail.com'
+EMAIL_HOST_PASSWORD='Azxcvb@zxcvb12'
+
 
 
 try:

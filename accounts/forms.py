@@ -3,39 +3,13 @@ import email
 from django import forms
 from django.db import models
 from django.core import validators
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,PasswordResetForm
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 from pip._vendor.html5lib._ihatexml import normaliseCharList
+from input_mask.widgets import InputMask
 
-
-class Email(forms.Form):
-    email = forms.EmailField(label='Digite seu E-mail', max_length=150)
-    email.widget.attrs.update({'class': 'form-control'})
-    def enviarEmailCadastro(self):
-        subject = 'Seja bem vindo a nosso site'
-        mensagem1 = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
-        email_from = settings.EMAIL_HOST_USER
-        email = ['fernandoti@live.com']
-        send_mail(subject, mensagem1, email_from,email)
-    def enviarEmailSenha(self):
-        subject = 'Seja bem vindo a nosso site'
-        mensagem2 = 'clique no link para criar sua conta https://assinaki.herokuapp.com/accounts/cadastro. '
-        email_form = settings.EMAIL_HOST_USER
-        email = ['fernandoti@live.com']
-        send_mail(subject,mensagem2,email_form,email)
-
-
-
-
-class LoginForm(forms.Form):
-
-    username = forms.CharField(label=("Usuário"), strip=False, widget=forms.TextInput)
-    username.widget.attrs.update({'class': 'form-control'})
-
-    password = forms.CharField(label=("Senha"), strip=False, widget=forms.PasswordInput)
-    password.widget.attrs.update({'class': 'form-control'})
 
 
 class Cadastro(UserCreationForm):
@@ -104,6 +78,8 @@ class Cadastro(UserCreationForm):
     cliente_cpf = forms.CharField(label='CPF', max_length=11,widget=forms.TextInput(attrs={'class': 'text span8',
             'placeholder': '000.000.000-00', 'mask': 'fone'}))
     cliente_cpf.widget.attrs.update({'class': 'form-control'})
+
+
 
     BR = 'Brasil'
     AR = 'Argentina'

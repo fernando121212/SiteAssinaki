@@ -1,58 +1,60 @@
-from .forms import Cadastro, LoginForm, Email
+from .forms import Cadastro
 from django.template.defaultfilters import slugify
 from .models import Cliente, Pais, Uf, Cidade, Bairro, Rua, Pessoa_juridica, Dados_cartao
 from django.contrib.auth import authenticate,login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.contrib.auth.views import PasswordResetView
 
 
-def email_cadastro(request):
-    tamplate_name = 'login.html'
-    context = {}
-    if request.method == 'POST':
-        form = Email(request.POST)
-        if form.is_valid():
+# def email_senha(request):
+#     tamplate_name = 'password_reset.html'
+#     context = {}
+#     if request.method == 'POST':
+#         form = Email(request.POST)
+#         if form.is_valid():
+#
+#              context['is_valid'] = True
+#              form = Email()
+#              form.enviarEmailSenha()
+#
+#         return redirect('accounts:login')
+#
+#     else:
+#         form = Email()
+#         context['enviar_email_senha'] = form
+#     return render(request, tamplate_name, context)
 
-             context['is_valid'] = True
-             form = Email()
-             form.enviar_email()
 
-        return redirect('accounts:login')
-
-    else:
-        form = Email()
-        context['form'] = form
-    return render(request, tamplate_name, context)
-
-
-def form_login(request):
-
-    tamplate_name = 'login.html'
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'],
-                   password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-
-                    return redirect('core:index-light')
-                else:
-                    return HttpResponse('Desabilitar account')
-            else:
-                return HttpResponse('Login Inválido')
-    else:
-        form = LoginForm()
-
-    context = {
-            'title': 'login',
-            'form': form,
-    }
-
-    return render(request, tamplate_name, context)
+#
+# def form_login(request):
+#
+#     tamplate_name = 'login.html'
+#
+#     if request.method == 'POST':
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#             user = authenticate(username=cd['username'],
+#                    password=cd['password'])
+#             if user is not None:
+#                 if user.is_active:
+#                     login(request, user)
+#
+#                     return redirect('core:index-light')
+#                 else:
+#                     return HttpResponse('Desabilitar account')
+#             else:
+#                 return HttpResponse('Login Inválido')
+#     else:
+#         form = LoginForm()
+#
+#     context = {
+#             'title': 'login',
+#             'form': form,
+#     }
+#
+#     return render(request, tamplate_name, context)
 
 def cadastro(request):
 
@@ -122,12 +124,13 @@ def cadastro(request):
             cliente_data_nascimento = form_data.get('cliente_data_nascimento')
             cliente_estado_civil = form_data.get('cliente_estado_civil')
             email = form_data.get('email')
+            # print(type(first_name))
             cliente_phone_fixo = form_data.get('cliente_phone_fixo')
             cliente_cel_phone = form_data.get('cliente_cel_phone')
             cliente_cpf = form_data.get('cliente_cpf')
             cliente, cliente_novo = Cliente.objects.get_or_create(
                 first_name = first_name,
-                slug = slugify(first_name, last_name),
+                slug = slugify('{0} {1}'.format(first_name,last_name)),
                 last_name = last_name,
                 cliente_data_nascimento = cliente_data_nascimento,
                 cliente_estado_civil = cliente_estado_civil,
